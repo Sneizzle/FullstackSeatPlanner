@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black; 
+   /* initialize flex */
+   display: flex; 
+   flex-direction: column;
+   /* set viewport size so we can allow to center things */
+   width: 100vw;
+   height: 100vh;
+   justify-content: space-between;
+   align-items: center;
+   font-family: "Trebuchet MS", sans-serif;
+   
+}
+
+.background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -10;
+}
+
+header h1{
+    color: rgb(255, 255, 255);
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#visual {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+.bottom-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 150px;
+}
+
+.input-container {
+    width: 100%;
+    max-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+input {
+    
+    width: 60%;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+}
+
+
+#submit-icon {
+    position:absolute;
+    top: 10px;
+    right: 250px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    scale: 200%;
+    border-radius: 15px;
+}
+
+
+.images-section {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.image-container {
+    width: 48%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
+}
+
+.image-container img {
+    width: 100%;
+}
+
+a {
+    color: white;
+}
+
+
+/* .fancySearchBar{
+    
+}  */

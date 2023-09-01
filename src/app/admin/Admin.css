@@ -1,0 +1,50 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    color: whitesmoke;
+    flex-direction: column;
+  }
+
+.main-header{
+color: #fff;
+  }
+
+
+  .create-form label {
+    color: whitesmoke !important;
+    font-size: 12px !important;
+  }
+
+
+  .bGroup {
+    display:flex;
+    flex-wrap: wrap;
+
+  }
+
+  
+  .admin-container {
+    display: flex;
+    height: 100vh; /* Make the container take up the full viewport height */
+    background-color: black;
+    color: whitesmoke;
+  }
+  
+  .left-component,
+  .right-component {
+    flex: 1; /* Both components will take equal width */
+    display: flex;
+    align-items: normal;
+    justify-content: center;
+    height: 100%; /* Make components take full height of the container */
+    border: 1px solid #ccc; /* Adding borders for visualization */
+  }
+  
+  .right-component {
+    border-left: none; /* Remove border on the right side of the right component */
+    background-color: darkgray;
+  }
+  
