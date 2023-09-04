@@ -20,7 +20,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { peopleState, personState } from "@/recoil/atoms";
 import { memo } from "react";
 import LayerGroups from "./LayerGroups";
-const MyMap = ({ addMarkerMode, defineSeat }) => {
+const MyMap = ({ addMarkerMode, defineSeat2 }) => {
   const height = Math.min(window.visualViewport?.height as number, 1511);
   const width = height / (1511 / 1069);
   const bounds = [
@@ -42,51 +42,39 @@ const MyMap = ({ addMarkerMode, defineSeat }) => {
         <LayerGroups></LayerGroups>
         <LeafLetAdminComponent
           addMarkerMode={addMarkerMode}
-          defineSeat={defineSeat}
+          defineSeat2={defineSeat2}
         />
       </MapContainer>
     </div>
   );
 };
-function LeafLetAdminComponent({ addMarkerMode, defineSeat }) {
-  const person = useRecoilValue(personState);
+function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }) {
   const [people, setPeople] = useRecoilState(peopleState);
-  const saveMarkers = (newMarkerCoords) => {
-    const data = [...people];
-    const current = data.findIndex((entry) => entry.id === person.id);
-    const newData = {
-      ...data[current],
-      markerCoords: newMarkerCoords,
-      checkbox: true,
-    };
+  const [person, setPerson] = useRecoilState(personState);
 
-    data[current] = newData;
-    setPeople(data);
-  };
   const map = useMapEvents({
     click: (e) => {
-      console.log(addMarkerMode);
-      if (!addMarkerMode || !person) return;
+      if (!addMarkerMode) return;
       const { lat, lng } = e.latlng;
-      // L.marker([lat, lng]).addTo(map);
+      const arraything = [lat, lng];
+      setPerson((prevState) => {
+        return {
+          ...prevState,
+          markerCoords: [...prevState.markerCoords, arraything],
+        };
+      });
 
-      axios
-        .put(
-          `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person.id}`,
-          {
-            ...person,
-            markerCoords: [lat, lng],
-            checkbox: true,
-          }
-        )
-
-        .then((response) => {
-          defineSeat();
-          saveMarkers([lat, lng]);
-
-          console.log(response.data);
-          // data til response.data
-        });
+      setPeople((prevState) => {
+        const data = [...prevState];
+        const current = data.findIndex((entry) => entry.id === person.id);
+        const newData = {
+          ...data[current],
+          markerCoords: [...data[current].markerCoords, [lat, lng]],
+          checkbox: true,
+        };
+        data[current] = newData;
+        return data;
+      });
     },
   });
   return null;

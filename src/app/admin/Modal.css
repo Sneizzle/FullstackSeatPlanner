@@ -3,10 +3,17 @@ body.active-modal {
 }
 
 .btn-modal {
-    padding: 10px 20px;
-    display: block;
-    margin: 100px auto 0;
-    font-size: 18px;
+  position: relative;
+
+  
+  
+    font-size: 32px;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  align-content: space-between;
 }
 
 .modal, .overlay {
@@ -53,8 +60,8 @@ body.active-modal {
 
 
 .controls {
-    /* Style for the control buttons on the right */
-    width: 50%; /* Take up 50% of the modal width */
+   
+    width: 50%; 
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -62,7 +69,6 @@ body.active-modal {
     margin-bottom: 20px;
 }
 
-/* Additional styling for control buttons */
 .controls button {
     margin: 0px;
     padding: 10px 20px;
@@ -70,17 +76,28 @@ body.active-modal {
 
 
 .table-container {
-        margin-top: 100px; /* Adjust this value as needed */
+  
+      
+        
+        font-size: large;
+        margin-top: 100px; 
         background-color: #1E1F25;
         border-radius: 30px;
         height: 540px;
-        width: 2600px;
+        width: 9800px;
         padding: 0 10px 10px 10px;
         overflow: scroll;
         overflow-x: hidden ;
 
 
   }
+  /* .table-settings { 
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 40px;
+    border-spacing: 30px;
+  } */
 
   .marker-table th {
     padding: 50px 15px;
@@ -89,4 +106,28 @@ body.active-modal {
   .button-container {
     display: flex;
     justify-content: space-between;
+  }
+
+
+  td {
+    margin-inline: 10px;
+    display: inline-block;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+ 
+
+  }
+
+
+/* attribute selector */
+  [disabled] {
+    color: red;
+  }
+
+
+  .save-button {
+    color:chartreuse
   }

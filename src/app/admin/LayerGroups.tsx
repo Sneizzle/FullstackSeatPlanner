@@ -1,28 +1,25 @@
-import { peopleState } from "@/recoil/atoms";
+import { peopleState, personState } from "@/recoil/atoms";
 import { useRecoilState } from "recoil";
 import { Marker, Popup, LayerGroup, Circle } from "react-leaflet";
 
 const LayerGroups = () => {
-  const [people, setPeople] = useRecoilState(peopleState);
-  return people.map((entry, index) => {
-    if (!entry.markerCoords || entry.markerCoords.length === 0) return null;
+  const [person] = useRecoilState(personState);
 
-    return (
-      <LayerGroup key={entry.id}>
-        <Circle
-          center={entry.markerCoords}
-          pathOptions={{ color: "green", fillColor: "green" }}
-          radius={100}
-        />
-        <Marker key={index} position={entry.markerCoords}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-          <button></button>
-        </Marker>
-      </LayerGroup>
-    );
-  });
+  return (
+    <LayerGroup key={person.id}>
+      {person.markerCoords?.map((coords) => {
+        if (!coords || coords.length === 0) return null;
+        return (
+          <Marker position={coords}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+            <button></button>
+          </Marker>
+        );
+      })}
+    </LayerGroup>
+  );
 };
 
 export default LayerGroups;
