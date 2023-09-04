@@ -11,15 +11,23 @@ body {
    justify-content: space-between;
    align-items: center;
    font-family: "Trebuchet MS", sans-serif;
-   
 }
+
+
+
+body .background-image header h1 {
+    height: 900px;
+    font-size: 40px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
 
 .background-image {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -10;
+   
 }
 
 header h1{
@@ -48,24 +56,34 @@ header h1{
 }
 
 .input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 600px;
     position: absolute;
     top: 50%;
-    left: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
 input {
-    
     width: 60%;
-    border: none;
+    /* border: none; */
+    border: 5px;
+    border-color: beige;
     font-size: 20px;
     padding: 10px;
     border-radius: 5px;
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
     box-sizing: border-box;
     margin: 0 auto;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
 
 }
 
@@ -73,12 +91,13 @@ input {
 #submit-icon {
     position:absolute;
     top: 10px;
-    right: 250px;
+    right: 135px;
     cursor: pointer;
     background-color: white;
     border: none;
     scale: 200%;
-    border-radius: 15px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 
@@ -98,7 +117,7 @@ input {
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
 }
 
-.image-container img {
+.image-container img { 
     width: 100%;
 }
 
@@ -106,7 +125,7 @@ a {
     color: white;
 }
 
-
-/* .fancySearchBar{
+/* 
+ .fancySearchBar{
     
-}  */
+}   */

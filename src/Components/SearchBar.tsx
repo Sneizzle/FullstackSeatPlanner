@@ -47,7 +47,7 @@ function SearchBar({ data }: { data: PersonConfig[] }) {
   };
 
   return (
-    <div className="fancySearchBar" style={{ width: 370 }}>
+    <div style={{ width: 370 }}>
       <ReactSearchAutocomplete
         items={data}
         onSearch={handleOnSearch}
