@@ -57,7 +57,7 @@ function Home() {
           </div>
         </section>
       </div>
-      <div>
+      <div className="admin-login">
         <a href="/admin">Admin Login</a>
       </div>
     </body>

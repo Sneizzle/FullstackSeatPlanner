@@ -27,7 +27,7 @@ body .background-image header h1 {
     width: 100%;
     height: 100%;
     overflow: hidden;
-   
+    z-index: 10;
 }
 
 header h1{
@@ -122,10 +122,11 @@ input {
 }
 
 a {
+    z-index: 10;
     color: white;
+
 }
 
-/* 
- .fancySearchBar{
-    
-}   */
+.admin-login {
+    z-index: 200;
+}
