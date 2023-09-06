@@ -2,7 +2,13 @@
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { PersonConfig } from "@/app/admin/Interfaces";
 
-function SearchBar({ data }: { data: PersonConfig[] }) {
+function SearchBar({
+  data,
+  onItemSelect,
+}: {
+  data: PersonConfig[];
+  onItemSelect: (item: PersonConfig) => void;
+}) {
   // note: the id field is mandatory
 
   const handleOnSearch = (string: string, results: PersonConfig[]) => {
@@ -18,11 +24,10 @@ function SearchBar({ data }: { data: PersonConfig[] }) {
   };
 
   const handleOnSelect = (item: PersonConfig) => {
-    // the item selected
     console.log(item);
     console.log("this is handle on select");
+    onItemSelect(item); // Call the onItemSelect callback
   };
-
   const handleOnFocus = () => {
     console.log("Focused");
   };

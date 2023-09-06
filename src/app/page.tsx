@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import { PersonConfig } from "./admin/Interfaces";
 
 function Home() {
-  // const inputElement = document.querySelector("input");
-
   const [message, setMessage] = useState("");
 
   const [updated, setUpdated] = useState("");
@@ -18,18 +16,14 @@ function Home() {
     setMessage(event.target.value);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      // 👇 Get input value
-      setUpdated(message);
-    }
-  };
-
-  const FindPerson = (person) => {
-    console.log("hey");
-  };
-
   const [APIData, setAPIData] = useState<PersonConfig[]>([]);
+
+  const sendProps = () => {
+    localStorage.setItem("searchedName", message);
+
+    window.location.href = "/FindPerson";
+  };
+
   useEffect(() => {
     axios
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
@@ -50,11 +44,28 @@ function Home() {
         <section className="images-section"></section>
         <section className="bottom-section">
           <div className="input-container">
-            <SearchBar data={APIData}></SearchBar>
-            <button onClick={FindPerson} id="submit-icon">
+            <SearchBar
+              data={APIData}
+              onItemSelect={(item) => {
+                localStorage.setItem("searchedName", item.name);
+                window.location.href = "/FindPerson";
+              }}
+            />
+            <button id="submit-icon">➢</button>{" "}
+          </div>
+
+          {/* <div className="input-container">
+            <input
+              type="text"
+              placeholder="Search by name"
+              onChange={handleChange}
+              value={message}
+            />
+            <button id="submit-icon" onClick={sendProps}>
               ➢
             </button>
           </div>
+           */}
         </section>
       </div>
       <div className="admin-login">
