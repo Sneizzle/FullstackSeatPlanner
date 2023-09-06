@@ -24,8 +24,6 @@ function SearchBar({
   };
 
   const handleOnSelect = (item: PersonConfig) => {
-    console.log(item);
-    console.log("this is handle on select");
     onItemSelect(item); // Call the onItemSelect callback
   };
   const handleOnFocus = () => {
@@ -63,6 +61,7 @@ function SearchBar({
         formatResult={formatResult}
         showIcon={false}
         showClear={false}
+        placeholder="Write name here"
       />
     </div>
   );

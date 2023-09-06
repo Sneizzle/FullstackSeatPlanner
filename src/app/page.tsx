@@ -11,17 +11,36 @@ function Home() {
   const [message, setMessage] = useState("");
 
   const [updated, setUpdated] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
     setMessage(event.target.value);
+    //clear previous message
+    setErrorMessage("");
   };
 
   const [APIData, setAPIData] = useState<PersonConfig[]>([]);
 
   const sendProps = () => {
-    localStorage.setItem("searchedName", message);
+    const trimmedMessage = message.trim();
 
-    window.location.href = "/FindPerson";
+    if (trimmedMessage === "") {
+      setErrorMessage("Please enter a name");
+    } else {
+      const matchingItem = APIData.find((item) => item.name === trimmedMessage);
+      if (matchingItem) {
+        localStorage.setItem("searchedName", trimmedMessage);
+        window.location.href = "/FindPerson";
+      } else {
+        setErrorMessage("Please enter a proper name");
+      }
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      sendProps();
+    }
   };
 
   useEffect(() => {
@@ -40,6 +59,7 @@ function Home() {
         <Background></Background>
         <header>
           <h1>Who are you looking for?</h1>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </header>
         <section className="images-section"></section>
         <section className="bottom-section">
@@ -50,8 +70,13 @@ function Home() {
                 localStorage.setItem("searchedName", item.name);
                 window.location.href = "/FindPerson";
               }}
+              onEnterKeyPress={handleKeyPress}
+              onChange={handleChange} // Pass the handleChange function
+              value={message} // Pass the message state
             />
-            <button id="submit-icon">➢</button>{" "}
+            <button id="submit-icon" onClick={sendProps}>
+              {/* ➢ */}
+            </button>{" "}
           </div>
 
           {/* <div className="input-container">
