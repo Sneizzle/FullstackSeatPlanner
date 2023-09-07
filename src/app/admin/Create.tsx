@@ -2,6 +2,7 @@
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import { useState } from "react";
 import axios from "axios";
+
 // import { useNavigate } from "react-router";
 
 export default function Create() {
@@ -33,23 +34,32 @@ export default function Create() {
       <Form className="create-form">
         <Form.Field>
           <label>Name</label>
-          <input placeholder="Name" onChange={(e) => setName(e.target.value)} />
+          <input
+            className="placeholdingcolor"
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+          />
         </Form.Field>
         <Form.Field>
           <label>Location</label>
           <input
+            className="placeholdingcolor"
             placeholder="Location"
             onChange={(e) => setLocation(e.target.value)}
           />
         </Form.Field>
         <Form.Field>
           <label>Team</label>
-          <input placeholder="Team" onChange={(e) => setTeam(e.target.value)} />
+          <input
+            className="placeholdingcolor"
+            placeholder="Team"
+            onChange={(e) => setTeam(e.target.value)}
+          />
         </Form.Field>
 
         <Form.Field>
           <Checkbox
-            label="I agree to the Terms and Conditions"
+            label="This checkbox needs to be removed"
             onChange={() => setCheckbox(!checkbox)}
           />
         </Form.Field>

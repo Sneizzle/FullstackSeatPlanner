@@ -88,7 +88,7 @@ body.active-modal {
         padding: 0 10px 10px 10px;
         overflow: scroll;
         overflow-x: hidden ;
-
+        color: white;
 
   }
   /* .table-settings { 
@@ -131,3 +131,15 @@ body.active-modal {
   .save-button {
     color:chartreuse
   }
+
+  .create-form {
+    
+  }
+
+  input, textarea, select, ::placeholder{
+    color: red;
+  }
+
+.placeholdingcolor {
+  color: red;
+}

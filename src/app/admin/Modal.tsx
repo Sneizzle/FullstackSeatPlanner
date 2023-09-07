@@ -10,6 +10,7 @@ import { peopleState, personState } from "@/recoil/atoms";
 import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import MyMap from "./MyMap";
+import { AiFillEdit } from "react-icons/Ai";
 
 export default function Modal() {
   const [person, setPerson] = useRecoilState(personState);
@@ -86,8 +87,12 @@ export default function Modal() {
 
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal">
-        Edit Map <BsTools />
+      <button onClick={toggleModal} className="box box3">
+        <i className="fancylogo">
+          <AiFillEdit />
+        </i>
+        <span className="text">Define a Route</span>
+        <span className="number">Draw</span>
       </button>
       {modal && (
         <div className="modal">

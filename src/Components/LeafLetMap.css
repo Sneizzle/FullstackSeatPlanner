@@ -1,0 +1,3 @@
+.polyline-animation {
+    transition: path 2s ease-in-out; /* Adjust the duration as needed */
+  }

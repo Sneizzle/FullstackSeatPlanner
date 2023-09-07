@@ -95,6 +95,8 @@ function Home() {
       </div>
       <div className="admin-login">
         <a href="/admin">Admin Login</a>
+        <br></br>
+        <a href="/admin2">Admin Login 2</a>
       </div>
     </body>
   );
