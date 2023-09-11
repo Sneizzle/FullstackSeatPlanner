@@ -8,6 +8,10 @@ import { BsSpeedometer, BsFillPeopleFill } from "react-icons/bs";
 import Read from "../admin/Read";
 import axios from "axios";
 import Modal from "../admin/Modal";
+import CreateModal from "./admin2create";
+import { PersonConfig } from "../admin/Interfaces";
+import ReturnButton from "./returnButton";
+import { useRouter } from "next/router";
 
 function Admin() {
   const [APIData, setAPIData] = useState([]);
@@ -62,21 +66,9 @@ function Admin() {
       </div>
 
       <div className="boxes">
-        <div className="box box1">
-          <i className="fancylogo">
-            <AiOutlineHome />
-          </i>
-          <span className="text">Return to Frontpage</span>
-          <span className="number">Home</span>
-        </div>
-        <div className="box box2">
-          <i className="fancylogo">
-            <BsTools />
-          </i>
-          <span className="text">Add a Person</span>
-          <span className="number">Create</span>
-        </div>
-        <Modal></Modal>
+        <ReturnButton />
+        <CreateModal />
+        <Modal />
       </div>
       <div className="activity">
         <div className="title">
