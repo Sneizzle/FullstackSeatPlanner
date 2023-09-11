@@ -24,7 +24,7 @@ const FindPerson = () => {
 
   return (
     <div>
-      <p>You searched for: {searchedName}</p>
+      {/* <p>You searched for: {searchedName}</p>
       {personData && (
         <div>
           <p>Marker Coordinates:</p>
@@ -36,7 +36,7 @@ const FindPerson = () => {
             ))}
           </ul>
         </div>
-      )}
+      )} */}
       {personData && (
         <LeafLetMapComponent
           coordinates={personData.markerCoords}

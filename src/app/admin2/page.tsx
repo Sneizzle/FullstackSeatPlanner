@@ -12,6 +12,8 @@ import CreateModal from "./admin2create";
 import { PersonConfig } from "../admin/Interfaces";
 import ReturnButton from "./returnButton";
 import { useRouter } from "next/router";
+import UpdateModal from "./admin2update";
+import { TfiReload } from "react-icons/tfi";
 
 function Admin() {
   const [APIData, setAPIData] = useState([]);
@@ -25,15 +27,8 @@ function Admin() {
       });
   }, []);
 
-  const setData = (data: PersonConfig) => {
-    const { id, name, location, team, checkbox } = data;
-    localStorage.setItem("ID", id.toString());
-    localStorage.setItem("Name", name);
-    localStorage.setItem("Location", location);
-    if (team !== undefined) {
-      localStorage.setItem("Team", team);
-    }
-    localStorage.setItem("Checkbox Value", checkbox.valueOf.toString());
+  const handleUpdate = () => {
+    getData();
   };
 
   const onDelete = (id: number) => {
@@ -55,64 +50,108 @@ function Admin() {
   // // }, []);
 
   return (
-    <div className="dash-content">
-      <div className="overview">
-        <div className="title">
-          <i className="fancylogo">
-            <BsSpeedometer />
-          </i>
-          <span className="text">DashBoard</span>
+    <div className="content-container">
+      <div className="dash-content">
+        <div className="overview">
+          <div className="title">
+            <i className="fancylogo">
+              <BsSpeedometer />
+            </i>
+            <span className="text">DashBoard</span>
+          </div>
         </div>
-      </div>
 
-      <div className="boxes">
-        <ReturnButton />
-        <CreateModal />
-        <Modal />
-      </div>
-      <div className="activity">
-        <div className="title">
-          <i>
-            <BsFillPeopleFill />
-          </i>
-          <span className="text">Recent Activity</span>
+        <div className="boxes">
+          <ReturnButton />
+          <CreateModal />
+          <Modal handleUpdate={handleUpdate} />
         </div>
-        <div className="activity-data">
-          <div className="data names">
-            <span className="data-title">Name</span>
-            {APIData.map((data) => (
-              <span className="data-list" key={data.id}>
-                {data.name}
-              </span>
-            ))}
+        <div className="activity">
+          <div className="title">
+            <i>
+              <BsFillPeopleFill />
+            </i>
+            <div className="text">
+              <div>Members Overview</div>
+            </div>
           </div>
-          <div className="data location">
-            <span className="data-title">Location</span>
-            {APIData.map((data) => (
-              <span className="data-list" key={data.id}>
-                {data.location}
-              </span>
-            ))}
+          <div className="activity-data">
+            <div className="data names">
+              <span className="data-title">Name</span>
+              {APIData.map((data) => (
+                <span className="data-list" key={data.id}>
+                  {data.name}
+                </span>
+              ))}
+            </div>
+            <div className="data location">
+              <span className="data-title">Location</span>
+              {APIData.map((data) => (
+                <span className="data-list" key={data.id}>
+                  {data.location}
+                </span>
+              ))}
+            </div>
+            <div className="data team">
+              <span className="data-title">Team</span>
+              {APIData.map((data) => (
+                <span className="data-list" key={data.id}>
+                  {data.team}
+                </span>
+              ))}
+            </div>
+            <div className="data seated">
+              <span className="data-title">Route Planned?</span>
+              {APIData.map((data) => (
+                <span
+                  className={`data-list ${
+                    data.checkbox ? "data-list-no" : "data-list-yes"
+                  }`}
+                  key={data.id}
+                >
+                  {data.checkbox ? "✓" : "X"}
+                </span>
+              ))}
+            </div>
+            <div className="data update">
+              <span className="data-title">Update Info</span>
+              {APIData.map((data) => (
+                <span className="data-list" key={data.id}>
+                  <UpdateModal data={data} onUpdate={handleUpdate} />
+                </span>
+              ))}
+            </div>
+            <div className="data delete">
+              <span className="data-title">Delete Profile </span>
+              {APIData.map((data) => (
+                <span className="data-list" key={data.id}>
+                  <button
+                    style={{ color: "red" }}
+                    onClick={() => onDelete(data.id)}
+                  >
+                    Delete {data.name} ☒
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="data team">
-            <span className="data-title">Team</span>
-            {APIData.map((data) => (
-              <span className="data-list" key={data.id}>
-                {data.team}
-              </span>
-            ))}
-          </div>
-          <div className="data seated">
-            <span className="data-title">Has a Seat?</span>
-            {APIData.map((data) => (
-              <span className="data-list" key={data.id}>
-                {data.checkbox ? "yes" : "no"}
-              </span>
-            ))}
-          </div>
+          {/* <button
+            onClick={handleUpdate}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              color: "blue",
+              position: "absolute",
+              top: "450px",
+              left: "1280px",
+            }}
+          >
+            Refresh Data<TfiReload></TfiReload>
+          </button> */}
         </div>
       </div>
     </div>
   );
 }
+
 export default Admin;

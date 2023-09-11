@@ -98,6 +98,12 @@ background: var(--box1-color);
   
 }
 
+.data.seated .data-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .activity-data .data-title{
     font-size: 20px;
     font-weight: 500;
@@ -110,4 +116,17 @@ background: var(--box1-color);
     white-space: nowrap;
 }
 
+.data-list-yes {
+    color: red;
+  }
+  .data-list-no {
+    color: rgb(39, 196, 0);
+  }
 
+.content-container{
+    margin: 0;
+    padding: 0;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

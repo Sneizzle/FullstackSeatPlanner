@@ -12,7 +12,7 @@ import { PersonConfig } from "./Interfaces";
 import MyMap from "./MyMap";
 import { AiFillEdit } from "react-icons/Ai";
 
-export default function Modal() {
+export default function Modal({ handleUpdate }) {
   const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
   const [modal, setModal] = useState(false);
@@ -49,6 +49,7 @@ export default function Modal() {
     );
     toggleAddMarkerMode();
     setPerson({});
+    handleUpdate();
   };
 
   const unassignSeat = (id) => {
@@ -79,6 +80,7 @@ export default function Modal() {
 
   const toggleModal = () => {
     setModal(!modal);
+    handleUpdate();
   };
 
   const ToggleRoute = () => {
