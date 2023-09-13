@@ -11,9 +11,12 @@ import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import MyMap from "./MyMap";
 import { AiFillEdit } from "react-icons/Ai";
+interface ModalProps {
+  handleUpdate: () => void; // Specify the type for handleUpdate
+}
+export default function Modal({ handleUpdate }: ModalProps) {
+  const [person, setPerson] = useRecoilState<PersonConfig>(personState);
 
-export default function Modal({ handleUpdate }) {
-  const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
   const [modal, setModal] = useState(false);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
@@ -22,7 +25,7 @@ export default function Modal({ handleUpdate }) {
     setAddMarkerMode((prevState) => !prevState);
   };
 
-  const IsButtonDisabled = (listPerson) => {
+  const IsButtonDisabled = (listPerson: PersonConfig) => {
     // console.log(person?.id, "tekst til og finde den");
     return person?.id !== undefined && listPerson.id !== person?.id;
   };
@@ -35,7 +38,7 @@ export default function Modal({ handleUpdate }) {
     setPerson(person);
   };
 
-  const IsActiveButton = (listPerson) => {
+  const IsActiveButton = (listPerson: PersonConfig) => {
     return addMarkerMode && listPerson.id === person.id;
   };
 
@@ -52,7 +55,7 @@ export default function Modal({ handleUpdate }) {
     handleUpdate();
   };
 
-  const unassignSeat = (id) => {
+  const unassignSeat = (id: number) => {
     axios
       .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
         markerCoords: [],
@@ -66,6 +69,7 @@ export default function Modal({ handleUpdate }) {
           return newState;
         });
         setPerson({});
+        handleUpdate();
         // console.log(response.data);
       });
   };

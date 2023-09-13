@@ -14,7 +14,7 @@ import ReturnButton from "./returnButton";
 import { useRouter } from "next/router";
 import UpdateModal from "./admin2update";
 import { TfiReload } from "react-icons/tfi";
-
+type HandleUpdateFunction = () => void;
 function Admin() {
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -27,7 +27,7 @@ function Admin() {
       });
   }, []);
 
-  const handleUpdate = () => {
+  const handleUpdate: HandleUpdateFunction = () => {
     getData();
   };
 
