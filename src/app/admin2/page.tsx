@@ -102,7 +102,7 @@ function Admin() {
               ))}
             </div>
             <div className="data seated">
-              <span className="data-title">Route Planned?</span>
+              <span className="data-title">Route?</span>
               {APIData.map((data) => (
                 <span
                   className={`data-list ${
