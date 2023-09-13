@@ -23,7 +23,7 @@ export default function Modal({ handleUpdate }) {
   };
 
   const IsButtonDisabled = (listPerson) => {
-    console.log(person?.id, "tekst til og finde den");
+    // console.log(person?.id, "tekst til og finde den");
     return person?.id !== undefined && listPerson.id !== person?.id;
   };
 
@@ -66,7 +66,7 @@ export default function Modal({ handleUpdate }) {
           return newState;
         });
         setPerson({});
-        console.log(response.data);
+        // console.log(response.data);
       });
   };
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Modal({ handleUpdate }) {
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
       .then((response) => {
         setPeople(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       });
   }, []);
 
@@ -83,9 +83,9 @@ export default function Modal({ handleUpdate }) {
     handleUpdate();
   };
 
-  const ToggleRoute = () => {
-    console.log("filer route here");
-  };
+  // const ToggleRoute = () => {
+  //   console.log("filer route here");
+  // };
 
   return (
     <>

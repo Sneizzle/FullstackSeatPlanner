@@ -1,3 +1,4 @@
+"use client";
 const Background = () => (
   <svg id="visual" viewBox="0 0 900 600" version="1.1">
     <rect x="0" y="0" width="100vw" height="100vh" fill="#001220" />

@@ -48,8 +48,6 @@ function Home() {
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
       .then((response) => {
         setAPIData(response.data);
-        console.log(response.data);
-        // data til response.data
       });
   }, []);
 
