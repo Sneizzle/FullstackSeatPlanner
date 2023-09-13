@@ -58,7 +58,7 @@ export default function Read() {
         <Table.Body>
           {APIData.map((data: PersonConfig) => {
             return (
-              <Table.Row>
+              <Table.Row key={data.id}>
                 <Table.Cell>{data.name}</Table.Cell>
                 <Table.Cell>{data.location}</Table.Cell>
                 <Table.Cell>{data.team}</Table.Cell>

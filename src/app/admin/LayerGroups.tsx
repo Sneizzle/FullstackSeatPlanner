@@ -10,7 +10,7 @@ const LayerGroups = () => {
       {person.markerCoords?.map((coords) => {
         if (!coords || coords.length === 0) return null;
         return (
-          <Marker position={coords}>
+          <Marker key={coords} position={coords}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>

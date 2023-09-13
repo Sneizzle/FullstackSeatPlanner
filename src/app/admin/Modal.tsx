@@ -76,7 +76,7 @@ export default function Modal({ handleUpdate }) {
         setPeople(response.data);
         // console.log(response.data);
       });
-  }, []);
+  }, [setPeople]);
 
   const toggleModal = () => {
     setModal(!modal);
