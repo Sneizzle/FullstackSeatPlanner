@@ -1,10 +1,7 @@
-.checkSize-mapcontainer {
-    width: 100%;
-    height: 100%;
-}
 
 
 .map {
-    width: 100%;
-    height: 100%;
+   max-width: 40vw !important;
+   max-height: 50vh !important;
+  
 }

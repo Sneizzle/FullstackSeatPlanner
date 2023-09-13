@@ -64,6 +64,7 @@ function Admin() {
         <div className="boxes">
           <ReturnButton />
           <CreateModal />
+
           <Modal handleUpdate={handleUpdate} />
         </div>
         <div className="activity">

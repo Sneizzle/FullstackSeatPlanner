@@ -97,21 +97,22 @@ export default function Modal({ handleUpdate }) {
         <span className="number">Draw</span>
       </button>
       {modal && (
-        <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
-          <div className="modal-content">
-            <div className="mapcomp">
-              {" "}
-              <MyMap
-                addMarkerMode={addMarkerMode}
-                defineSeat2={defineSeat2}
-              />{" "}
-            </div>
-            <div className="controls">
-              <div className="button-container"></div>
-            </div>
-            <div className="table-container">
-              {/* <table className="marker-table">
+        <div className="ipad-fit">
+          <div className="modal">
+            <div onClick={toggleModal} className="overlay"></div>
+            <div className="modal-content">
+              <div className="mapcomp">
+                {" "}
+                <MyMap
+                  addMarkerMode={addMarkerMode}
+                  defineSeat2={defineSeat2}
+                />{" "}
+              </div>
+              <div className="controls">
+                <div className="button-container"></div>
+              </div>
+              <div className="table-container">
+                {/* <table className="marker-table">
                 <thead>
                   <tr>
                     <th>Marker</th>
@@ -120,56 +121,56 @@ export default function Modal({ handleUpdate }) {
                   </tr>
                 </thead>
               </table> */}
-              <div className="grid">
-                <span>Name</span>
-                <span>Team</span>
-                <span>Seat</span>
-                <span>Actions</span>
-                <span>Marker Position</span>
-                {people.map((person) => {
-                  return (
-                    <Fragment key={person.id}>
-                      <span>{person.name}</span>
-                      <span>{person.team}</span>
-                      <span>{person.checkbox ? "Assigned" : "Unknown"}</span>
-                      <span>
-                        {/* toggle drawing mode button */}
+                <div className="grid">
+                  <span>Name</span>
+                  <span>Team</span>
+                  <span>Seat</span>
+                  <span>Actions</span>
+                  <span>Marker Position</span>
+                  {people.map((person) => {
+                    return (
+                      <Fragment key={person.id}>
+                        <span>{person.name}</span>
+                        <span>{person.team}</span>
+                        <span>{person.checkbox ? "Assigned" : "Unknown"}</span>
+                        <span>
+                          {/* toggle drawing mode button */}
 
-                        {IsActiveButton(person) ? (
-                          <button className="save-button" onClick={SaveRoute}>
-                            Save Button
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => defineSeat(person)}
-                            disabled={IsButtonDisabled(person)}
-                          >
-                            Create Button{" "}
-                          </button>
-                        )}
+                          {IsActiveButton(person) ? (
+                            <button className="save-button" onClick={SaveRoute}>
+                              Save Button
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => defineSeat(person)}
+                              disabled={IsButtonDisabled(person)}
+                            >
+                              Create Button{" "}
+                            </button>
+                          )}
 
-                        {/* remove seat button */}
-                        {person.checkbox && (
-                          <button
-                            onClick={() => unassignSeat(person.id)}
-                            disabled={IsButtonDisabled(person)}
-                          >
-                            Delete Route
-                          </button>
-                        )}
-                      </span>
-                      <span>
-                        {person.markerCoords?.map((positions) => {
-                          return positions
-                            .map((position) => position.toFixed(0))
-                            .join(", ");
-                        })}
-                      </span>
-                    </Fragment>
-                  );
-                })}
+                          {/* remove seat button */}
+                          {person.checkbox && (
+                            <button
+                              onClick={() => unassignSeat(person.id)}
+                              disabled={IsButtonDisabled(person)}
+                            >
+                              Delete Route
+                            </button>
+                          )}
+                        </span>
+                        <span>
+                          {person.markerCoords?.map((positions) => {
+                            return positions
+                              .map((position) => position.toFixed(0))
+                              .join(", ");
+                          })}
+                        </span>
+                      </Fragment>
+                    );
+                  })}
 
-                {/* <Table singleLine>
+                  {/* <Table singleLine>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>Name</Table.HeaderCell>
@@ -216,11 +217,12 @@ export default function Modal({ handleUpdate }) {
                     })}
                   </Table.Body>
                 </Table> */}
+                </div>
               </div>
+              <button className="close-modal" onClick={toggleModal}>
+                Close Window
+              </button>
             </div>
-            <button className="close-modal" onClick={toggleModal}>
-              Close Window
-            </button>
           </div>
         </div>
       )}

@@ -20,6 +20,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { peopleState, personState } from "@/recoil/atoms";
 import { memo } from "react";
 import LayerGroups from "./LayerGroups";
+import "./map.css";
 const MyMap = ({ addMarkerMode, defineSeat2 }) => {
   const height = Math.min(window.visualViewport?.height as number, 1511);
   const width = height / (1511 / 1069);
