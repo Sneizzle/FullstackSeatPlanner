@@ -58,12 +58,12 @@ function Home() {
       <div className="background-image">
         <Background></Background>
         <header>
-          <h1>Who are you looking for?</h1>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
         </header>
         <section className="images-section"></section>
         <section className="bottom-section">
           <div className="input-container">
+            <h1>Who are you looking for?</h1>
             <SearchBar
               data={APIData}
               onItemSelect={(item) => {
