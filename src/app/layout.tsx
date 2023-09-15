@@ -1,4 +1,4 @@
-import RecoilRootWrapper from "@/recoilwrapper";
+import RecoilRootWrapper from "@/recoil/recoilwrapper";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";

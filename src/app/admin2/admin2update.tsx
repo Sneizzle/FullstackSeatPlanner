@@ -2,8 +2,12 @@
 import axios from "axios";
 import "./modalcreate.css";
 import { useEffect, useState } from "react";
-
-export default function UpdateModal({ data, onUpdate }) {
+import { HandleUpdateFunction, PersonConfig } from "./Interfaces";
+interface propsUpdateModal {
+  data: PersonConfig;
+  onUpdate: HandleUpdateFunction;
+}
+export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
   const [modal, setModal] = useState(false);
 
   // Corrected toggle function name

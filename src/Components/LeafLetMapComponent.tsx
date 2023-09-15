@@ -5,14 +5,19 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
+import { PersonConfig } from "@/app/admin2/Interfaces";
 
-const LeafLetMapComponent = ({ coordinates }) => {
+interface propsForCoordinates {
+  coordinates: PersonConfig["markerCoords"];
+}
+
+const LeafLetMapComponent = ({ coordinates }: propsForCoordinates) => {
   const height: number = Math.min(
     window.visualViewport?.height as number,
     1511
   );
   const width: number = height / (1511 / 1069);
-  const bounds = [
+  const bounds: L.LatLngBoundsExpression = [
     [0, 0],
     [height, width],
   ];
@@ -26,7 +31,10 @@ const LeafLetMapComponent = ({ coordinates }) => {
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex < coordinates.length) {
-        setMarkerPosition(coordinates[currentIndex]);
+        // setMarkerPosition(coordinates[currentIndex]);
+        setMarkerPosition(
+          new LatLng(coordinates[currentIndex][0], coordinates[currentIndex][1])
+        );
         currentIndex++;
       } else {
         currentIndex = 0;

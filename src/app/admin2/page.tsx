@@ -1,22 +1,16 @@
 "use client";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { BsFillPeopleFill, BsSpeedometer } from "react-icons/bs";
 import "./admin2.css";
-import { BsTools } from "react-icons/bs";
-import { AiOutlineHome } from "react-icons/Ai";
-import { AiFillEdit } from "react-icons/Ai";
-import { BsSpeedometer, BsFillPeopleFill } from "react-icons/bs";
-import Read from "../admin/Read";
+import { peopleState } from "@/recoil/atoms";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { HandleUpdateFunction } from "./Interfaces";
 import Modal from "./Modal";
 import CreateModal from "./admin2create";
-import { PersonConfig } from "./Interfaces";
-import ReturnButton from "./returnButton";
-import { useRouter } from "next/router";
 import UpdateModal from "./admin2update";
-import { TfiReload } from "react-icons/tfi";
-import { useRecoilState } from "recoil";
-import { peopleState } from "@/recoil/atoms";
-type HandleUpdateFunction = () => void;
+import ReturnButton from "./returnButton";
+
 function Admin() {
   const [people, setPeople] = useRecoilState(peopleState);
   // const [APIData, setAPIData] = useState([]);

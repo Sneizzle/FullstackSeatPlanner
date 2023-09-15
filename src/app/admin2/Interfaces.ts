@@ -22,3 +22,4 @@ export interface RoomConfig {
     number: number;
 }
 
+export type HandleUpdateFunction = () => void;

@@ -1,16 +1,13 @@
 "use client";
-import React, { useState, useEffect, Fragment } from "react";
+import { Fragment, useState } from "react";
 import "./Modal.css";
-import { BsTools } from "react-icons/bs";
 // import MyMap from "./MyMap";
-import { Button, Table } from "semantic-ui-react";
-import Read from "./Read";
-import axios from "axios";
 import { peopleState, personState } from "@/recoil/atoms";
+import axios from "axios";
+import { AiFillEdit } from "react-icons/Ai";
 import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import MyMap from "./MyMap";
-import { AiFillEdit } from "react-icons/Ai";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }

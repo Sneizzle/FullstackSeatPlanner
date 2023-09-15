@@ -13,12 +13,6 @@ function Home() {
   const [updated, setUpdated] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-    //clear previous message
-    setErrorMessage("");
-  };
-
   const [APIData, setAPIData] = useState<PersonConfig[]>([]);
 
   const sendProps = () => {
@@ -34,12 +28,6 @@ function Home() {
       } else {
         setErrorMessage("Please enter a proper name");
       }
-    }
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      sendProps();
     }
   };
 
@@ -68,32 +56,14 @@ function Home() {
                 localStorage.setItem("searchedName", item.name);
                 window.location.href = "/FindPerson";
               }}
-              onEnterKeyPress={handleKeyPress}
-              onChange={handleChange} // Pass the handleChange function
-              value={message} // Pass the message state
             />
             <button id="submit-icon" onClick={sendProps}>
               {/* ➢ */}
             </button>{" "}
           </div>
-
-          {/* <div className="input-container">
-            <input
-              type="text"
-              placeholder="Search by name"
-              onChange={handleChange}
-              value={message}
-            />
-            <button id="submit-icon" onClick={sendProps}>
-              ➢
-            </button>
-          </div>
-           */}
         </section>
       </div>
       <div className="admin-login">
-        {/* <a href="/admin">Admin Login</a>
-        <br></br> */}
         <a href="/admin2">Admin Login </a>
       </div>
     </body>

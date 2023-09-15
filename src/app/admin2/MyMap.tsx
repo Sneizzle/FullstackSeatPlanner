@@ -1,27 +1,14 @@
 "use client";
-import React, { Component, useEffect, useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  useMapEvents,
-  ImageOverlay,
-  LayerGroup,
-  Circle,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { peopleState, personState } from "@/recoil/atoms";
+import L, { CRS } from "leaflet";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import { CRS } from "leaflet";
-import L from "leaflet";
-import Image from "next/image";
-import axios from "axios";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { peopleState, personState } from "@/recoil/atoms";
-import { memo } from "react";
+import "leaflet/dist/leaflet.css";
+import { ImageOverlay, MapContainer, useMapEvents } from "react-leaflet";
+import { useRecoilState } from "recoil";
+import { PersonConfig } from "./Interfaces";
 import LayerGroups from "./LayerGroups";
 import "./map.css";
-import { PersonConfig } from "./Interfaces";
 interface myMapProps {
   addMarkerMode: boolean;
   defineSeat2: (_: PersonConfig) => void;
