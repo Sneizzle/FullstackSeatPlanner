@@ -5,7 +5,7 @@
 
 export interface PersonConfig {
     // skal udfyldes
-    markerCoords: [number[]];
+    markerCoords: number[][];
     id: number;
     location: string;
     team?: string;

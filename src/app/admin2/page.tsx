@@ -14,17 +14,14 @@ import ReturnButton from "./returnButton";
 import { useRouter } from "next/router";
 import UpdateModal from "./admin2update";
 import { TfiReload } from "react-icons/tfi";
+import { useRecoilState } from "recoil";
+import { peopleState } from "@/recoil/atoms";
 type HandleUpdateFunction = () => void;
 function Admin() {
-  const [APIData, setAPIData] = useState([]);
+  const [people, setPeople] = useRecoilState(peopleState);
+  // const [APIData, setAPIData] = useState([]);
   useEffect(() => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
-      .then((response) => {
-        setAPIData(response.data);
-        // console.log(response.data);
-        // data til response.data
-      });
+    getData();
   }, []);
 
   const handleUpdate: HandleUpdateFunction = () => {
@@ -42,7 +39,7 @@ function Admin() {
     axios
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/`)
       .then((getData) => {
-        setAPIData(getData.data);
+        setPeople(getData.data);
       });
   };
   // // useEffect(() => {
@@ -79,7 +76,7 @@ function Admin() {
           <div className="activity-data">
             <div className="data names">
               <span className="data-title">Name</span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span className="data-list" key={data.id}>
                   {data.name}
                 </span>
@@ -87,7 +84,7 @@ function Admin() {
             </div>
             <div className="data location">
               <span className="data-title">Location</span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span className="data-list" key={data.id}>
                   {data.location}
                 </span>
@@ -95,7 +92,7 @@ function Admin() {
             </div>
             <div className="data team">
               <span className="data-title">Team</span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span className="data-list" key={data.id}>
                   {data.team}
                 </span>
@@ -103,7 +100,7 @@ function Admin() {
             </div>
             <div className="data seated">
               <span className="data-title">Route?</span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span
                   className={`data-list ${
                     data.checkbox ? "data-list-no" : "data-list-yes"
@@ -116,7 +113,7 @@ function Admin() {
             </div>
             <div className="data update">
               <span className="data-title">Update Info</span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span className="data-list" key={data.id}>
                   <UpdateModal data={data} onUpdate={handleUpdate} />
                 </span>
@@ -124,7 +121,7 @@ function Admin() {
             </div>
             <div className="data delete">
               <span className="data-title">Delete Profile </span>
-              {APIData.map((data) => (
+              {people.map((data) => (
                 <span className="data-list" key={data.id}>
                   <button
                     style={{ color: "red" }}

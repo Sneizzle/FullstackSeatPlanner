@@ -21,10 +21,15 @@ import { peopleState, personState } from "@/recoil/atoms";
 import { memo } from "react";
 import LayerGroups from "./LayerGroups";
 import "./map.css";
-const MyMap = ({ addMarkerMode, defineSeat2 }) => {
+import { PersonConfig } from "./Interfaces";
+interface myMapProps {
+  addMarkerMode: boolean;
+  defineSeat2: (_: PersonConfig) => void;
+}
+const MyMap = ({ addMarkerMode, defineSeat2 }: myMapProps) => {
   const height = Math.min(window.visualViewport?.height as number, 1511);
   const width = height / (1511 / 1069);
-  const bounds = [
+  const bounds: L.LatLngBoundsExpression = [
     [0, 0],
     [height, width],
   ];
@@ -49,7 +54,7 @@ const MyMap = ({ addMarkerMode, defineSeat2 }) => {
     </div>
   );
 };
-function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }) {
+function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }: myMapProps) {
   const [people, setPeople] = useRecoilState(peopleState);
   const [person, setPerson] = useRecoilState(personState);
 
@@ -59,15 +64,17 @@ function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }) {
       const { lat, lng } = e.latlng;
       const arraything = [lat, lng];
       setPerson((prevState) => {
+        if (undefined === prevState) {
+          return prevState;
+        }
         return {
           ...prevState,
           markerCoords: [...prevState.markerCoords, arraything],
         };
       });
-
       setPeople((prevState) => {
         const data = [...prevState];
-        const current = data.findIndex((entry) => entry.id === person.id);
+        const current = data.findIndex((entry) => entry.id === person?.id);
         const newData = {
           ...data[current],
           markerCoords: [...data[current].markerCoords, [lat, lng]],

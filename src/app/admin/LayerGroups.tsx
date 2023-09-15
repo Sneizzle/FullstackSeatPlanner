@@ -7,12 +7,12 @@ const LayerGroups = () => {
   const [person] = useRecoilState(personState);
 
   return (
-    <LayerGroup key={person.id}>
-      {person.markerCoords?.map((coords) => {
+    <LayerGroup key={person?.id}>
+      {person?.markerCoords?.map((coords) => {
         if (!coords || coords.length !== 2) return null;
         const position: LatLngTuple = [coords[0], coords[1]];
         return (
-          <Marker key={person.id} position={position}>
+          <Marker key={person?.id} position={position}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>

@@ -14,9 +14,9 @@ import { AiFillEdit } from "react-icons/Ai";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
-export default function Modal({ handleUpdate }: ModalProps) {
-  const [person, setPerson] = useRecoilState<PersonConfig>(personState);
 
+export default function Modal({ handleUpdate }: ModalProps) {
+  const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
   const [modal, setModal] = useState(false);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
@@ -39,20 +39,19 @@ export default function Modal({ handleUpdate }: ModalProps) {
   };
 
   const IsActiveButton = (listPerson: PersonConfig) => {
-    return addMarkerMode && listPerson.id === person.id;
+    return addMarkerMode && listPerson.id === person?.id;
   };
 
   const SaveRoute = () => {
     axios.put(
-      `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person.id}`,
+      `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person?.id}`,
       {
         ...person,
         checkbox: true,
       }
     );
     toggleAddMarkerMode();
-    setPerson({});
-    handleUpdate();
+    setPerson(undefined);
   };
 
   const unassignSeat = (id: number) => {
@@ -68,28 +67,22 @@ export default function Modal({ handleUpdate }: ModalProps) {
           newState[index] = response.data;
           return newState;
         });
-        setPerson({});
-        handleUpdate();
-        // console.log(response.data);
+        // const initialPerson:PersonConfig = {
+        //   markerCoords: [[]],
+        //   id: 0,
+        //   location: "",
+        //   team: "",
+        //   name: "",
+        //   checkbox: false,
+        // };
+        setPerson(undefined);
       });
   };
-  useEffect(() => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
-      .then((response) => {
-        setPeople(response.data);
-        // console.log(response.data);
-      });
-  }, [setPeople]);
 
   const toggleModal = () => {
     setModal(!modal);
     handleUpdate();
   };
-
-  // const ToggleRoute = () => {
-  //   console.log("filer route here");
-  // };
 
   return (
     <>
@@ -116,15 +109,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
                 <div className="button-container"></div>
               </div>
               <div className="table-container">
-                {/* <table className="marker-table">
-                <thead>
-                  <tr>
-                    <th>Marker</th>
-                    <th>Position</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-              </table> */}
                 <div className="grid">
                   <span>Name</span>
                   <span>Team</span>
@@ -173,54 +157,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
                       </Fragment>
                     );
                   })}
-
-                  {/* <Table singleLine>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Name</Table.HeaderCell>
-                      <Table.HeaderCell>Team</Table.HeaderCell>
-                      <Table.HeaderCell>Seated</Table.HeaderCell>
-                      <Table.HeaderCell> Actions</Table.HeaderCell>
-                      <Table.HeaderCell> Marker Position</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {people.map((person) => {
-                      return (
-                        <Table.Row key={person.id}>
-                          <Table.Cell>{person.name}</Table.Cell>
-                          <Table.Cell>{person.team}</Table.Cell>
-                          <Table.Cell>
-                            {person.checkbox ? (
-                              "Assigned"
-                            ) : (
-                              <button onClick={() => defineSeat(person)}>
-                                {assignSeatMode
-                                  ? "Place a Marker"
-                                  : "Unassigned"}
-                              </button>
-                            )}
-                          </Table.Cell>
-                          <Table.Cell>
-                            <button> Show Person Route</button>
-                            {person.checkbox && (
-                              <button onClick={() => unassignSeat(person.id)}>
-                                Remove Seat
-                              </button>
-                            )}
-                          </Table.Cell>
-                          <Table.Cell>
-                            {person.markerCoords?.map((positions) =>
-                              positions
-                                .map((position) => position.toFixed(0))
-                                .join(", ")
-                            )}
-                          </Table.Cell>
-                        </Table.Row>
-                      );
-                    })}
-                  </Table.Body>
-                </Table> */}
                 </div>
               </div>
               <button className="close-modal" onClick={toggleModal}>
