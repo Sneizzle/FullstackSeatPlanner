@@ -2,7 +2,6 @@
 import axios from "axios";
 import "./modalcreate.css";
 import { useEffect, useState } from "react";
-import { Button, Form } from "semantic-ui-react";
 
 export default function UpdateModal({ data, onUpdate }) {
   const [modal, setModal] = useState(false);

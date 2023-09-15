@@ -5,7 +5,7 @@ import "./Home.css";
 import Background from "./Background";
 import SearchBar from "../Components/SearchBar";
 import { useEffect, useState } from "react";
-import { PersonConfig } from "./admin/Interfaces";
+import { PersonConfig } from "./admin2/Interfaces";
 
 function Home() {
   const [message, setMessage] = useState("");

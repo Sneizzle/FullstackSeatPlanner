@@ -1,15 +1,15 @@
 "use client";
 import { Fragment, useEffect, useState } from "react";
-import "../admin2/admin2.css";
+import "./admin2.css";
 import { BsTools } from "react-icons/bs";
 import { AiOutlineHome } from "react-icons/Ai";
 import { AiFillEdit } from "react-icons/Ai";
 import { BsSpeedometer, BsFillPeopleFill } from "react-icons/bs";
 import Read from "../admin/Read";
 import axios from "axios";
-import Modal from "../admin/Modal";
+import Modal from "./Modal";
 import CreateModal from "./admin2create";
-import { PersonConfig } from "../admin/Interfaces";
+import { PersonConfig } from "./Interfaces";
 import ReturnButton from "./returnButton";
 import { useRouter } from "next/router";
 import UpdateModal from "./admin2update";

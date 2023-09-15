@@ -1,4 +1,4 @@
-import { PersonConfig } from "@/app/admin/Interfaces";
+import { PersonConfig } from "@/app/admin2/Interfaces";
 import { atom } from "recoil";
 
 export const personState = atom <PersonConfig | undefined>({

@@ -1,6 +1,6 @@
 "use client";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { PersonConfig } from "@/app/admin/Interfaces";
+import { PersonConfig } from "@/app/admin2/Interfaces";
 
 function SearchBar({
   data,
