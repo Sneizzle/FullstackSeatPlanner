@@ -179,8 +179,8 @@ background: var(--box1-color);
 /* Media query for screens in portrait orientation and within the specified size range */
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
     .content-container {
-      width: 100%; /* Take up full screen width */
-      margin: 0; /* Remove margins */
+      width: 100%;
+      margin: 0; 
       padding: 0;
     }
   
@@ -189,16 +189,16 @@ background: var(--box1-color);
     }
   
     .dash-content .boxes .box {
-      width: var(--box-width); /* Adjust box width */
+      width: var(--box-width); 
     }
   
     .box1 button,
     .box2 button,
     .box3 button {
-      width: auto; /* Allow buttons to expand based on content */
+      width: auto;
     }
   
     .activity-data .data {
-      max-width: 100%; /* Allow data elements to take full width */
+      max-width: 100%;
     }
   }
