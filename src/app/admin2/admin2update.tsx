@@ -41,9 +41,9 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
         {data.name.length > 12 ? data.name.substring(0, 12) + "..." : data.name}
       </button>
       {modal && (
-        <div className="updatemodal">
-          <div onClick={toggleupdateModal} className="updateoverlay"></div>
-          <div className="update-modal-content">
+        <div className={`modal ${modal ? "active" : ""}`}>
+          <div onClick={toggleupdateModal} className="overlay"></div>
+          <div className="createmodal-content">
             <button className="close-modal" onClick={toggleupdateModal}>
               Close Window
             </button>

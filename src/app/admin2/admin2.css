@@ -178,6 +178,9 @@ background: var(--box1-color);
 
 /* Media query for screens in portrait orientation and within the specified size range */
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    body {
+        overflow-x: hidden;
+      }
     .content-container {
       width: 100%;
       margin: 0; 

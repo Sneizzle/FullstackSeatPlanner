@@ -42,7 +42,7 @@ export default function CreateModal() {
         <span className="number">Create</span>
       </button>
       {modal && (
-        <div className={`modal ${modal ? "active" : ""}`}>
+        <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="createmodal-content">
             <button className="close-modal" onClick={toggleModal}>

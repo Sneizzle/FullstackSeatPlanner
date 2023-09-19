@@ -15,7 +15,7 @@ interface ModalProps {
 export default function Modal({ handleUpdate }: ModalProps) {
   const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
 
   const toggleAddMarkerMode = () => {
@@ -125,7 +125,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
 
                             {IsActiveButton(person) ? (
                               <button
-                                className="action-button"
+                                className="saveButton"
                                 onClick={SaveRoute}
                               >
                                 Save Button
@@ -136,14 +136,17 @@ export default function Modal({ handleUpdate }: ModalProps) {
                                 onClick={() => defineSeat(person)}
                                 disabled={IsButtonDisabled(person)}
                               >
-                                Define Route{" "}
+                                <span>Draw</span>
+                                <i className="fancyLogo">
+                                  <AiFillEdit />{" "}
+                                </i>
                               </button>
                             )}
 
                             {/* remove seat button */}
                             {person.checkbox && (
                               <button
-                                className="action-button"
+                                className="action-button-delete"
                                 onClick={() => unassignSeat(person.id)}
                                 disabled={IsButtonDisabled(person)}
                               >
@@ -166,7 +169,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
                 </div>{" "}
               </div>
               <button className="close-modal" onClick={toggleModal}>
-                Close Window
+                Close
               </button>
             </div>
           </div>
