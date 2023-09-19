@@ -1,4 +1,6 @@
 :root{
+    --content-width: 60%;
+    --box-width: calc(100% / 3 - 15px);
     --text-color: black;
     --primary-color: whitesmoke;
     --title-icon-color: rgb(0, 0, 0);
@@ -10,10 +12,10 @@
 
   
 
-.dash-content{
+/* .dash-content{
     padding: -top 50px;
     
-}
+} */
 .dash-content .title{
     display: flex;
     align-items: center;
@@ -70,6 +72,13 @@ background: var(--box1-color);
     color: var(--text-color);
 }
 
+.boxes{
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    
+}
+
+
 .boxes .box.box2 {
     background: rgba(255,230,176,255)
     
@@ -85,11 +94,48 @@ background: var(--box1-color);
     width: 100%;
 }
 
+
+.box1 button {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box2 button {
+    width: 100px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.box3 button {
+    width: 100px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+
+
 .activity .activity-data{
     display: flex;
-   
 
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
+
+
+
+
+
 .activity-data .data{
     display: flex;
     flex-direction:column ;
@@ -124,9 +170,35 @@ background: var(--box1-color);
   }
 
 .content-container{
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
+   
 }
+
+/* Media query for screens in portrait orientation and within the specified size range */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .content-container {
+      width: 100%; /* Take up full screen width */
+      margin: 0; /* Remove margins */
+      padding: 0;
+    }
+  
+    .dash-content {
+      margin: 70px 0 30px 0;
+    }
+  
+    .dash-content .boxes .box {
+      width: var(--box-width); /* Adjust box width */
+    }
+  
+    .box1 button,
+    .box2 button,
+    .box3 button {
+      width: auto; /* Allow buttons to expand based on content */
+    }
+  
+    .activity-data .data {
+      max-width: 100%; /* Allow data elements to take full width */
+    }
+  }

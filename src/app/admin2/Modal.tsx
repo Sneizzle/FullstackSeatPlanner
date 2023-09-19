@@ -78,6 +78,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
 
   const toggleModal = () => {
     setModal(!modal);
+
     handleUpdate();
   };
 
@@ -104,57 +105,65 @@ export default function Modal({ handleUpdate }: ModalProps) {
               </div>
               <div className="controls">
                 <div className="button-container"></div>
-              </div>
-              <div className="table-container">
-                <div className="grid">
-                  <span>Name</span>
-                  <span>Team</span>
-                  <span>Seat</span>
-                  <span>Actions</span>
-                  <span>Marker Position</span>
-                  {people.map((person) => {
-                    return (
-                      <Fragment key={person.id}>
-                        <span>{person.name}</span>
-                        <span>{person.team}</span>
-                        <span>{person.checkbox ? "Assigned" : "Unknown"}</span>
-                        <span>
-                          {/* toggle drawing mode button */}
+                <div className="table-container">
+                  <div className="grid">
+                    <span>Name</span>
+                    {/* <span>Team</span> */}
+                    <span>Seat</span>
+                    <span>Actions</span>
+                    {/* <span>Marker Position</span> */}
+                    {people.map((person) => {
+                      return (
+                        <Fragment key={person.id}>
+                          <span>{person.name}</span>
+                          {/* <span>{person.team}</span> */}
+                          <span>
+                            {person.checkbox ? "Assigned" : "Unknown"}
+                          </span>
+                          <span>
+                            {/* toggle drawing mode button */}
 
-                          {IsActiveButton(person) ? (
-                            <button className="save-button" onClick={SaveRoute}>
-                              Save Button
-                            </button>
-                          ) : (
-                            <button
-                              onClick={() => defineSeat(person)}
-                              disabled={IsButtonDisabled(person)}
-                            >
-                              Create Button{" "}
-                            </button>
-                          )}
+                            {IsActiveButton(person) ? (
+                              <button
+                                className="action-button"
+                                onClick={SaveRoute}
+                              >
+                                Save Button
+                              </button>
+                            ) : (
+                              <button
+                                className="action-button"
+                                onClick={() => defineSeat(person)}
+                                disabled={IsButtonDisabled(person)}
+                              >
+                                Define Route{" "}
+                              </button>
+                            )}
 
-                          {/* remove seat button */}
-                          {person.checkbox && (
-                            <button
-                              onClick={() => unassignSeat(person.id)}
-                              disabled={IsButtonDisabled(person)}
-                            >
-                              Delete Route
-                            </button>
-                          )}
-                        </span>
-                        <span>
-                          {person.markerCoords?.map((positions) => {
-                            return positions
-                              .map((position) => position.toFixed(0))
-                              .join(", ");
-                          })}
-                        </span>
-                      </Fragment>
-                    );
-                  })}
-                </div>
+                            {/* remove seat button */}
+                            {person.checkbox && (
+                              <button
+                                className="action-button"
+                                onClick={() => unassignSeat(person.id)}
+                                disabled={IsButtonDisabled(person)}
+                              >
+                                Delete Route
+                              </button>
+                            )}
+                          </span>
+                          {/* note the marker position in table */}
+                          {/* <span>
+                            {person.markerCoords?.map((positions) => {
+                              return positions
+                                .map((position) => position.toFixed(0))
+                                .join(", ");
+                            })}
+                          </span> */}
+                        </Fragment>
+                      );
+                    })}
+                  </div>
+                </div>{" "}
               </div>
               <button className="close-modal" onClick={toggleModal}>
                 Close Window

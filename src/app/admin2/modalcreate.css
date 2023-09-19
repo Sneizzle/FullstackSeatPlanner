@@ -1,5 +1,6 @@
 
 .modal {
+  animation: fade 0.4s forwards;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +12,14 @@
   z-index: 999; 
 
 }
-
+@keyframes fade {
+	from {
+		opacity:0;
+	}
+	to {
+		opacity:1;
+	}
+}
 
 .createmodal-content, .update-modal-content {
   position: fixed;

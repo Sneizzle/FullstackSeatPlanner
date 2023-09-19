@@ -72,7 +72,9 @@ function Admin() {
               <span className="data-title">Name</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
-                  {data.name}
+                  {data.name.length > 12
+                    ? data.name.substring(0, 12) + "..."
+                    : data.name}
                 </span>
               ))}
             </div>
@@ -80,7 +82,9 @@ function Admin() {
               <span className="data-title">Location</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
-                  {data.location}
+                  {data.location.length > 12
+                    ? data.location.substring(0, 12) + "..."
+                    : data.location}
                 </span>
               ))}
             </div>
@@ -88,7 +92,9 @@ function Admin() {
               <span className="data-title">Team</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
-                  {data.team}
+                  {data.team.length > 12
+                    ? data.team.substring(0, 12) + "..."
+                    : data.team}
                 </span>
               ))}
             </div>
@@ -121,7 +127,11 @@ function Admin() {
                     style={{ color: "red" }}
                     onClick={() => onDelete(data.id)}
                   >
-                    Delete {data.name} ☒
+                    Delete{" "}
+                    {data.name.length > 12
+                      ? data.name.substring(0, 12) + "..."
+                      : data.name}{" "}
+                    ☒
                   </button>
                 </span>
               ))}

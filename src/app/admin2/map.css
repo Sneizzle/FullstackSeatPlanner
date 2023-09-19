@@ -1,7 +1,8 @@
 
 
 .map {
-   max-width: 40vw !important;
-   max-height: 50vh !important;
-  
+   max-width: 90vw !important;
+   max-height: 90vh !important;
+  padding: auto;
 }
+

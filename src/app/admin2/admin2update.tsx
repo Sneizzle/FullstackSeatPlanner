@@ -37,11 +37,12 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
     <>
       <button style={{ color: "green" }} onClick={toggleupdateModal}>
         {" "}
-        Edit {data.name}
+        Edit{" "}
+        {data.name.length > 12 ? data.name.substring(0, 12) + "..." : data.name}
       </button>
       {modal && (
-        <div className="modal">
-          <div onClick={toggleupdateModal} className="overlay"></div>
+        <div className="updatemodal">
+          <div onClick={toggleupdateModal} className="updateoverlay"></div>
           <div className="update-modal-content">
             <button className="close-modal" onClick={toggleupdateModal}>
               Close Window
