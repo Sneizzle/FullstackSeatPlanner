@@ -5,38 +5,37 @@ import "./Home.css";
 import Background from "./Background";
 import SearchBar from "../Components/SearchBar";
 import { useEffect, useState } from "react";
-import { PersonConfig } from "./admin/Interfaces";
+import { PersonConfig } from "./admin2/Interfaces";
 
 function Home() {
-  // const inputElement = document.querySelector("input");
-
   const [message, setMessage] = useState("");
 
   const [updated, setUpdated] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
+  const [APIData, setAPIData] = useState<PersonConfig[]>([]);
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      // 👇 Get input value
-      setUpdated(message);
+  const sendProps = () => {
+    const trimmedMessage = message.trim();
+
+    if (trimmedMessage === "") {
+      setErrorMessage("Please enter a name");
+    } else {
+      const matchingItem = APIData.find((item) => item.name === trimmedMessage);
+      if (matchingItem) {
+        localStorage.setItem("searchedName", trimmedMessage);
+        window.location.href = "/FindPerson";
+      } else {
+        setErrorMessage("Please enter a proper name");
+      }
     }
   };
 
-  const FindPerson = (person) => {
-    console.log("hey");
-  };
-
-  const [APIData, setAPIData] = useState<PersonConfig[]>([]);
   useEffect(() => {
     axios
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
       .then((response) => {
         setAPIData(response.data);
-        console.log(response.data);
-        // data til response.data
       });
   }, []);
 
@@ -45,20 +44,27 @@ function Home() {
       <div className="background-image">
         <Background></Background>
         <header>
-          <h1>Who are you looking for?</h1>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </header>
         <section className="images-section"></section>
         <section className="bottom-section">
           <div className="input-container">
-            <SearchBar data={APIData}></SearchBar>
-            <button onClick={FindPerson} id="submit-icon">
-              ➢
-            </button>
+            <h1>Who are you looking for?</h1>
+            <SearchBar
+              data={APIData}
+              onItemSelect={(item) => {
+                localStorage.setItem("searchedName", item.name);
+                window.location.href = "/FindPerson";
+              }}
+            />
+            <button id="submit-icon" onClick={sendProps}>
+              {/* ➢ */}
+            </button>{" "}
           </div>
         </section>
       </div>
-      <div>
-        <a href="/admin">Admin Login</a>
+      <div className="admin-login">
+        <a href="/admin2">Admin Login </a>
       </div>
     </body>
   );

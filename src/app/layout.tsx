@@ -1,4 +1,4 @@
-import RecoilRootWrapper from "@/recoilwrapper";
+import RecoilRootWrapper from "@/recoil/recoilwrapper";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -17,7 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        ></meta>
+      </head>
+      {/* <body className={inter.className}> */}
+      <body>
         <RecoilRootWrapper>{children}</RecoilRootWrapper>
       </body>
     </html>

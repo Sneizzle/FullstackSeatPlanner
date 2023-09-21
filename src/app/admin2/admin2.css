@@ -1,0 +1,207 @@
+:root{
+    --content-width: 60%;
+    --box-width: calc(100% / 3 - 15px);
+    --text-color: black;
+    --primary-color: whitesmoke;
+    --title-icon-color: rgb(0, 0, 0);
+    --text-color: rgb(0, 0, 0);
+    --box1-color: rgba(76,162,251,255);
+   --box2-color: rgb(40, 207, 230);
+   --box3-color: rgb(226, 152, 216);
+}
+
+  
+
+/* .dash-content{
+    padding: -top 50px;
+    
+} */
+.dash-content .title{
+    display: flex;
+    align-items: center;
+    margin: 70px 0 30px 0;
+}
+
+.dash-content .title i{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--title-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.dash-content .title .text{
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+.dash-content .boxes{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dash-content .boxes .box{
+display: flex;
+flex-direction: column;
+align-items: center;
+border-radius: 12px;
+width: calc(100% / 3 - 15px);
+padding: 15px 20px;
+background: var(--box1-color);
+}
+.boxes .box i{
+   font-size: 35px;
+   color: var(--text-color);
+
+}
+.boxes .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.boxes .box .number {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.boxes{
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    
+}
+
+
+.boxes .box.box2 {
+    background: rgba(255,230,176,255)
+    
+}
+.boxes .box.box3  {
+    background: rgba(232,209,249,255)
+}
+
+.dash-content .activity .activity-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+.box1 button {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box2 button {
+    width: 100px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.box3 button {
+    width: 100px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+
+
+.activity .activity-data{
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+
+.activity-data .data{
+    display: flex;
+    flex-direction:column ;
+    margin: 0 15px;
+    height: 120px;
+  
+}
+
+.data.seated .data-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-data .data-title{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.activity-data .data .data-list{
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+    white-space: nowrap;
+}
+
+.data-list-yes {
+    color: red;
+  }
+  .data-list-no {
+    color: rgb(39, 196, 0);
+  }
+
+.content-container{
+    margin: 0 auto;
+    padding: 0;
+    width: 60%;
+   
+}
+
+/* Media query for screens in portrait orientation and within the specified size range */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    body {
+        overflow-x: hidden;
+      }
+    .content-container {
+      width: 100%;
+      margin: 0; 
+      padding: 0;
+    }
+  
+    .dash-content {
+      margin: 70px 0 30px 0;
+    }
+  
+    .dash-content .boxes .box {
+      width: var(--box-width); 
+    }
+  
+    .box1 button,
+    .box2 button,
+    .box3 button {
+      width: auto;
+    }
+  
+    .activity-data .data {
+      max-width: 100%;
+    }
+  }
