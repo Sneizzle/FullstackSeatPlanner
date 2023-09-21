@@ -2,15 +2,18 @@ import { peopleState, personState } from "@/recoil/atoms";
 import { useRecoilState } from "recoil";
 import { Marker, Popup, LayerGroup, Circle } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
+import { ConvertPointToCoord } from "@/Components/Helperman";
 
-const LayerGroups = () => {
+const LayerGroups = ({ height, width }) => {
   const [person] = useRecoilState(personState);
 
   return (
     <LayerGroup>
       {person?.markerCoords?.map((coords, index) => {
         if (!coords || coords.length !== 2) return null;
-        const position: LatLngTuple = [coords[0], coords[1]];
+        const Coords = ConvertPointToCoord(coords, [height, width]);
+        const position: LatLngTuple = [Coords[0], Coords[1]];
+        console.log(position);
         return (
           <Marker key={`${person?.id}-${index}`} position={position}>
             <Popup>

@@ -9,8 +9,8 @@ import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import LayerGroups from "./LayerGroups";
 import "./map.css";
-import { useMemo } from "react";
-import dynamic from "next/dynamic";
+import { ConvertCoordToPoint } from "@/Components/Helperman";
+
 interface myMapProps {
   addMarkerMode: boolean;
   defineSeat2: (_: PersonConfig) => void;
@@ -18,6 +18,7 @@ interface myMapProps {
 const MyMap = ({ addMarkerMode, defineSeat2 }: myMapProps) => {
   const height = Math.min(window.visualViewport?.height as number, 1511);
   const width = height / (1511 / 1069);
+
   const bounds: L.LatLngBoundsExpression = [
     [0, 0],
     [height, width],
@@ -35,16 +36,21 @@ const MyMap = ({ addMarkerMode, defineSeat2 }: myMapProps) => {
         maxBounds={bounds}
       >
         <ImageOverlay bounds={bounds} url="/officepicture.png" />
-        <LayerGroups></LayerGroups>
+        <LayerGroups height={height} width={width}></LayerGroups>
         <LeafLetAdminComponent
           addMarkerMode={addMarkerMode}
           defineSeat2={defineSeat2}
+          bounds={[height, width]}
         />
       </MapContainer>
     </div>
   );
 };
-function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }: myMapProps) {
+function LeafLetAdminComponent({
+  addMarkerMode,
+  defineSeat2,
+  bounds,
+}: myMapProps & { bounds: number[] }) {
   const [people, setPeople] = useRecoilState(peopleState);
   const [person, setPerson] = useRecoilState(personState);
 
@@ -52,7 +58,7 @@ function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }: myMapProps) {
     click: (e) => {
       if (!addMarkerMode) return;
       const { lat, lng } = e.latlng;
-      const arraything = [lat, lng];
+      const arraything = ConvertCoordToPoint([lat, lng], bounds);
       setPerson((prevState) => {
         if (undefined === prevState) {
           return prevState;
@@ -67,7 +73,7 @@ function LeafLetAdminComponent({ addMarkerMode, defineSeat2 }: myMapProps) {
         const current = data.findIndex((entry) => entry.id === person?.id);
         const newData = {
           ...data[current],
-          markerCoords: [...data[current].markerCoords, [lat, lng]],
+          markerCoords: [...data[current].markerCoords, arraything],
           checkbox: true,
         };
         data[current] = newData;
