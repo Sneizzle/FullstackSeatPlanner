@@ -9,6 +9,8 @@ import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import LayerGroups from "./LayerGroups";
 import "./map.css";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
 interface myMapProps {
   addMarkerMode: boolean;
   defineSeat2: (_: PersonConfig) => void;
@@ -20,6 +22,7 @@ const MyMap = ({ addMarkerMode, defineSeat2 }: myMapProps) => {
     [0, 0],
     [height, width],
   ];
+
   return (
     <div>
       <MapContainer

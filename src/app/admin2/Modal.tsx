@@ -8,6 +8,8 @@ import { AiFillEdit } from "react-icons/Ai";
 import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interfaces";
 import MyMap from "./MyMap";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
@@ -17,6 +19,15 @@ export default function Modal({ handleUpdate }: ModalProps) {
   const [people, setPeople] = useRecoilState(peopleState);
   const [modal, setModal] = useState(true);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("@/app/admin2/MyMap"), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  );
 
   const toggleAddMarkerMode = () => {
     setAddMarkerMode((prevState) => !prevState);
@@ -98,7 +109,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
             <div className="modal-content">
               <div className="mapcomp">
                 {" "}
-                <MyMap
+                <Map
                   addMarkerMode={addMarkerMode}
                   defineSeat2={defineSeat2}
                 />{" "}
