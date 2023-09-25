@@ -1,79 +1,76 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react"; // Import React
-import { BsTools } from "react-icons/bs";
-
-import "./modalcreate.css";
-
-export default function CreateModal() {
+import "../Styles/modalcreate.css";
+import { useEffect, useState } from "react";
+import { HandleUpdateFunction, PersonConfig } from "../Interface/Interfaces";
+interface propsUpdateModal {
+  data: PersonConfig;
+  onUpdate: HandleUpdateFunction;
+}
+export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
   const [modal, setModal] = useState(false);
 
   // Corrected toggle function name
-  const toggleModal = () => {
+  const toggleupdateModal = () => {
     setModal(!modal);
   };
-
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [team, setTeam] = useState("");
+  const [id, setID] = useState<number | null>(data.id);
+  const [name, setName] = useState(data.name || "");
+  const [location, setLocation] = useState(data.location || "");
+  const [team, setTeam] = useState(data.team || "");
   const [checkbox, setCheckbox] = useState(false);
 
-  const postData = () => {
+  const UpdateAPIData = () => {
     axios
-      .post("https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData", {
+      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
         name,
         location,
         team,
-        checkbox,
-        markerCoords: [],
       })
       .then(() => {
-        window.location.reload();
-        // navigation("/admin");
+        onUpdate();
+        toggleupdateModal();
       });
   };
   return (
     <>
-      <button onClick={toggleModal} className="box box2">
-        <i className="fancylogo">
-          <BsTools />
-        </i>
-        <span className="text">Define a Person</span>
-        <span className="number">Create</span>
+      <button style={{ color: "green" }} onClick={toggleupdateModal}>
+        {" "}
+        Edit{" "}
+        {data.name.length > 12 ? data.name.substring(0, 12) + "..." : data.name}
       </button>
       {modal && (
-        <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
+        <div className={`modal ${modal ? "active" : ""}`}>
+          <div onClick={toggleupdateModal} className="overlay"></div>
           <div className="createmodal-content">
-            <button className="close-modal" onClick={toggleModal}>
+            <button className="close-modal" onClick={toggleupdateModal}>
               Close Window
             </button>
             <div className="create-form">
               <label></label>
               <input
                 className="placeholdingcolor"
-                placeholder="Name"
+                placeholder={data.name}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <label></label>
               <input
                 className="placeholdingcolor"
-                placeholder="Location"
+                placeholder={data.location}
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
               <label></label>
               <input
                 className="placeholdingcolor"
-                placeholder="Team"
+                placeholder={data.team}
                 value={team}
                 onChange={(e) => setTeam(e.target.value)}
               />
-
               <button
+                onClick={UpdateAPIData}
                 className="button-primary"
-                onClick={postData}
                 type="button"
               >
                 Submit

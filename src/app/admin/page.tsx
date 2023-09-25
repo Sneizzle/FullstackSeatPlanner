@@ -1,14 +1,14 @@
 "use client";
 import { useEffect } from "react";
 import { BsFillPeopleFill, BsSpeedometer } from "react-icons/bs";
-import "./admin2.css";
+import "../admin/Styles/admin.css";
 import { peopleState } from "@/recoil/atoms";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { HandleUpdateFunction } from "./Interfaces";
+import { HandleUpdateFunction } from "./Interface/Interfaces";
 import Modal from "./Modal";
-import CreateModal from "./admin2create";
-import UpdateModal from "./admin2update";
+import CreateModal from "./Components/admincreate";
+import UpdateModal from "./Components/adminupdate";
 import ReturnButton from "./returnButton";
 
 function Admin() {
@@ -17,11 +17,9 @@ function Admin() {
   useEffect(() => {
     getData();
   }, []);
-
   const handleUpdate: HandleUpdateFunction = () => {
     getData();
   };
-
   const onDelete = (id: number) => {
     axios
       .delete(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`)
@@ -36,10 +34,6 @@ function Admin() {
         setPeople(getData.data);
       });
   };
-  // // useEffect(() => {
-  // Read({ onDataLoaded });
-  // // }, []);
-
   return (
     <div className="content-container">
       <div className="dash-content">
@@ -55,7 +49,6 @@ function Admin() {
         <div className="boxes">
           <ReturnButton />
           <CreateModal />
-
           <Modal handleUpdate={handleUpdate} />
         </div>
         <div className="activity">
@@ -92,7 +85,7 @@ function Admin() {
               <span className="data-title">Team</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
-                  {data.team.length > 12
+                  {data.team !== undefined && data.team.length > 12
                     ? data.team.substring(0, 12) + "..."
                     : data.team}
                 </span>
@@ -137,19 +130,6 @@ function Admin() {
               ))}
             </div>
           </div>
-          {/* <button
-            onClick={handleUpdate}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: "blue",
-              position: "absolute",
-              top: "450px",
-              left: "1280px",
-            }}
-          >
-            Refresh Data<TfiReload></TfiReload>
-          </button> */}
         </div>
       </div>
     </div>

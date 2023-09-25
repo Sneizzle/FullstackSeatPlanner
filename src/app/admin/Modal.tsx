@@ -1,12 +1,12 @@
 "use client";
 import { Fragment, useState } from "react";
-import "./Modal.css";
+import "./Styles/Modal.css";
 // import MyMap from "./MyMap";
 import { peopleState, personState } from "@/recoil/atoms";
 import axios from "axios";
 import { AiFillEdit } from "react-icons/Ai";
 import { useRecoilState } from "recoil";
-import { PersonConfig } from "./Interfaces";
+import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
@@ -17,18 +17,17 @@ interface ModalProps {
 export default function Modal({ handleUpdate }: ModalProps) {
   const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
 
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/app/admin2/MyMap"), {
+      dynamic(() => import("@/app/admin/MyMap"), {
         loading: () => <p>A map is loading</p>,
         ssr: false,
       }),
     []
   );
-
   const toggleAddMarkerMode = () => {
     setAddMarkerMode((prevState) => !prevState);
   };
@@ -37,7 +36,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
     // console.log(person?.id, "tekst til og finde den");
     return person?.id !== undefined && listPerson.id !== person?.id;
   };
-
   const defineSeat = (person: PersonConfig) => {
     toggleAddMarkerMode();
     setPerson(person);
@@ -45,11 +43,9 @@ export default function Modal({ handleUpdate }: ModalProps) {
   const defineSeat2 = (person: PersonConfig) => {
     setPerson(person);
   };
-
   const IsActiveButton = (listPerson: PersonConfig) => {
     return addMarkerMode && listPerson.id === person?.id;
   };
-
   const SaveRoute = () => {
     axios.put(
       `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person?.id}`,
@@ -61,7 +57,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
     toggleAddMarkerMode();
     setPerson(undefined);
   };
-
   const unassignSeat = (id: number) => {
     axios
       .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
@@ -75,24 +70,14 @@ export default function Modal({ handleUpdate }: ModalProps) {
           newState[index] = response.data;
           return newState;
         });
-        // const initialPerson:PersonConfig = {
-        //   markerCoords: [[]],
-        //   id: 0,
-        //   location: "",
-        //   team: "",
-        //   name: "",
-        //   checkbox: false,
-        // };
         setPerson(undefined);
       });
   };
 
   const toggleModal = () => {
     setModal(!modal);
-
     handleUpdate();
   };
-
   return (
     <>
       <button onClick={toggleModal} className="box box3">
@@ -119,21 +104,18 @@ export default function Modal({ handleUpdate }: ModalProps) {
                 <div className="table-container">
                   <div className="grid">
                     <span>Name</span>
-                    {/* <span>Team</span> */}
+
                     <span>Seat</span>
                     <span>Actions</span>
-                    {/* <span>Marker Position</span> */}
+
                     {people.map((person) => {
                       return (
                         <Fragment key={person.id}>
                           <span>{person.name}</span>
-                          {/* <span>{person.team}</span> */}
                           <span>
                             {person.checkbox ? "Assigned" : "Unknown"}
                           </span>
                           <span>
-                            {/* toggle drawing mode button */}
-
                             {IsActiveButton(person) ? (
                               <button
                                 className="saveButton"
@@ -153,8 +135,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
                                 </i>
                               </button>
                             )}
-
-                            {/* remove seat button */}
                             {person.checkbox && (
                               <button
                                 className="action-button-delete"
@@ -165,14 +145,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
                               </button>
                             )}
                           </span>
-                          {/* note the marker position in table */}
-                          {/* <span>
-                            {person.markerCoords?.map((positions) => {
-                              return positions
-                                .map((position) => position.toFixed(0))
-                                .join(", ");
-                            })}
-                          </span> */}
                         </Fragment>
                       );
                     })}

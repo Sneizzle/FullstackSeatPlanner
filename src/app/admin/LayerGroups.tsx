@@ -2,7 +2,7 @@ import { peopleState, personState } from "@/recoil/atoms";
 import { useRecoilState } from "recoil";
 import { Marker, Popup, LayerGroup, Circle } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
-import { ConvertPointToCoord } from "@/Components/Helperman";
+import { ConvertPointToCoord } from "@/app/Components/Helperman";
 
 const LayerGroups = ({ height, width }) => {
   const [person] = useRecoilState(personState);
