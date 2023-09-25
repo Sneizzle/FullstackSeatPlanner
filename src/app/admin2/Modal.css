@@ -263,9 +263,9 @@ body.active-modal {
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
   .modal-content {
     top: 30%; /* Adjust this value to vertically center the modal */
-    left: 35%;
-    max-width: 90vw;
-    max-height: 90vh;
+    left: 33%;
+    max-width: 100vw;
+    max-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -295,9 +295,19 @@ body.active-modal {
 
 
 .map {
-  max-width: 35vw !important;
+  max-width: 50vw !important;
 
 }
-
+.close-modal {
+  padding: 5px 5px !important;
+  background-color: #25b60c !important;
+  position: absolute;
+  left: 520px !important;
+    /* right: 300px !important; */
+  border: none;
+max-width: 50px;
+  z-index: 9999;
+  color: white !important;
+}
 
 }
