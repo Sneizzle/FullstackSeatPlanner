@@ -9,32 +9,17 @@ function SearchBar({
   data: PersonConfig[];
   onItemSelect: (item: PersonConfig) => void;
 }) {
-  const handleOnSearch = (string: string, results: PersonConfig[]) => {
-    console.log(string, results);
-    console.log("this is handle on search ting");
-  };
-
-  const handleOnHover = (result: PersonConfig) => {
-    console.log(result);
-  };
-
+  const handleOnSearch = (string: string, results: PersonConfig[]) => {};
+  const handleOnHover = (result: PersonConfig) => {};
   const handleOnSelect = (item: PersonConfig) => {
     onItemSelect(item);
   };
-  const handleOnFocus = () => {
-    console.log("Focused");
-  };
+  const handleOnFocus = () => {};
   const formatResult = (item: PersonConfig) => {
     return (
       <>
         <span style={{ display: "block", textAlign: "left" }}>
-          id: {item.id}
-        </span>
-        <span style={{ display: "block", textAlign: "left" }}>
           name: {item.name}
-        </span>
-        <span style={{ display: "block", textAlign: "left" }}>
-          location: {item.location}
         </span>
         <span style={{ display: "block", textAlign: "left" }}>
           team: {item.team}
