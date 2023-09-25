@@ -1,8 +1,5 @@
 "use client";
 //Personinterface
-
-
-
 export interface PersonConfig {
     // skal udfyldes
     markerCoords: number[][];
@@ -12,14 +9,10 @@ export interface PersonConfig {
     name: string;
     checkbox: boolean;
 }
-
-
-
 //Roominterface
 export interface RoomConfig {
     // skal udfyldes
     location: number;
     number: number;
 }
-
 export type HandleUpdateFunction = () => void;

@@ -2,7 +2,7 @@
 import axios from "axios";
 import "./modalcreate.css";
 import { useEffect, useState } from "react";
-import { HandleUpdateFunction, PersonConfig } from "./Interfaces";
+import { HandleUpdateFunction, PersonConfig } from "../Interface/Interfaces";
 interface propsUpdateModal {
   data: PersonConfig;
   onUpdate: HandleUpdateFunction;
@@ -14,7 +14,6 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
   const toggleupdateModal = () => {
     setModal(!modal);
   };
-
   const [id, setID] = useState<number | null>(data.id);
   const [name, setName] = useState(data.name || "");
   const [location, setLocation] = useState(data.location || "");
@@ -69,7 +68,6 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
                 value={team}
                 onChange={(e) => setTeam(e.target.value)}
               />
-
               <button
                 onClick={UpdateAPIData}
                 className="button-primary"

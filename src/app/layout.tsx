@@ -23,7 +23,6 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         ></meta>
       </head>
-      {/* <body className={inter.className}> */}
       <body>
         <RecoilRootWrapper>{children}</RecoilRootWrapper>
       </body>

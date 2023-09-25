@@ -6,7 +6,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet/dist/leaflet.css";
 import { ImageOverlay, MapContainer, useMapEvents } from "react-leaflet";
 import { useRecoilState } from "recoil";
-import { PersonConfig } from "./Interfaces";
+import { PersonConfig } from "./Interface/Interfaces";
 import LayerGroups from "./LayerGroups";
 import "./map.css";
 import { ConvertCoordToPoint } from "@/Components/Helperman";
@@ -23,7 +23,6 @@ const MyMap = ({ addMarkerMode, defineSeat2 }: myMapProps) => {
     [0, 0],
     [height, width],
   ];
-
   return (
     <div>
       <MapContainer
@@ -83,5 +82,4 @@ function LeafLetAdminComponent({
   });
   return null;
 }
-
 export default MyMap;

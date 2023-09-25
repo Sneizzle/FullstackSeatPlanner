@@ -1,6 +1,6 @@
 "use client";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { PersonConfig } from "@/app/admin2/Interfaces";
+import { PersonConfig } from "@/app/admin/Interface/Interfaces";
 
 function SearchBar({
   data,
@@ -9,27 +9,21 @@ function SearchBar({
   data: PersonConfig[];
   onItemSelect: (item: PersonConfig) => void;
 }) {
-  // note: the id field is mandatory
-
   const handleOnSearch = (string: string, results: PersonConfig[]) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
     console.log(string, results);
     console.log("this is handle on search ting");
   };
 
   const handleOnHover = (result: PersonConfig) => {
-    // the item hovered
     console.log(result);
   };
 
   const handleOnSelect = (item: PersonConfig) => {
-    onItemSelect(item); // Call the onItemSelect callback
+    onItemSelect(item);
   };
   const handleOnFocus = () => {
     console.log("Focused");
   };
-
   const formatResult = (item: PersonConfig) => {
     return (
       <>
@@ -48,7 +42,6 @@ function SearchBar({
       </>
     );
   };
-
   return (
     <div style={{ width: 370 }}>
       <ReactSearchAutocomplete
@@ -66,5 +59,4 @@ function SearchBar({
     </div>
   );
 }
-
 export default SearchBar;
