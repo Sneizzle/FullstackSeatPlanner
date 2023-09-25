@@ -4,7 +4,12 @@ import { Marker, Popup, LayerGroup, Circle } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import { ConvertPointToCoord } from "@/app/Components/Helperman";
 
-const LayerGroups = ({ height, width }) => {
+interface propsForDimensions {
+  height: number;
+  width: number;
+}
+
+const LayerGroups: React.FC<propsForDimensions> = ({ height, width }) => {
   const [person] = useRecoilState(personState);
 
   return (
@@ -13,7 +18,6 @@ const LayerGroups = ({ height, width }) => {
         if (!coords || coords.length !== 2) return null;
         const Coords = ConvertPointToCoord(coords, [height, width]);
         const position: LatLngTuple = [Coords[0], Coords[1]];
-        console.log(position);
         return (
           <Marker key={`${person?.id}-${index}`} position={position}>
             <Popup>
