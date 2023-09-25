@@ -8,8 +8,7 @@ import { ImageOverlay, MapContainer, useMapEvents } from "react-leaflet";
 import { useRecoilState } from "recoil";
 import { PersonConfig } from "./Interface/Interfaces";
 import LayerGroups from "./LayerGroups";
-import "./map.css";
-import { ConvertCoordToPoint } from "@/Components/Helperman";
+import { ConvertCoordToPoint } from "@/app/Components/Helperman";
 
 interface myMapProps {
   addMarkerMode: boolean;

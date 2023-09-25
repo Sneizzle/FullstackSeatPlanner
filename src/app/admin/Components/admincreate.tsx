@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BsTools } from "react-icons/bs";
-import "./modalcreate.css";
+import "../Styles/modalcreate.css";
 
 export default function CreateModal() {
   const [modal, setModal] = useState(false);

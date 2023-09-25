@@ -2,7 +2,7 @@
 import axios from "axios";
 import "./Home.css";
 import Background from "./Background";
-import SearchBar from "../Components/SearchBar";
+import SearchBar from "./Components/SearchBar";
 import { useEffect, useState } from "react";
 import { PersonConfig } from "./admin/Interface/Interfaces";
 function Home() {
@@ -56,7 +56,7 @@ function Home() {
         </section>
       </div>
       <div className="admin-login">
-        <a href="/admin2">Admin Login </a>
+        <a href="/admin">Admin Login </a>
       </div>
     </body>
   );

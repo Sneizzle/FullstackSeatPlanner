@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useState } from "react";
-import "./Modal.css";
+import "./Styles/Modal.css";
 // import MyMap from "./MyMap";
 import { peopleState, personState } from "@/recoil/atoms";
 import axios from "axios";
@@ -17,7 +17,7 @@ interface ModalProps {
 export default function Modal({ handleUpdate }: ModalProps) {
   const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
 
   const Map = useMemo(

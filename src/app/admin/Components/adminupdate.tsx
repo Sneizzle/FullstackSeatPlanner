@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import "./modalcreate.css";
+import "../Styles/modalcreate.css";
 import { useEffect, useState } from "react";
 import { HandleUpdateFunction, PersonConfig } from "../Interface/Interfaces";
 interface propsUpdateModal {

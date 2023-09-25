@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { BsFillPeopleFill, BsSpeedometer } from "react-icons/bs";
-import "./admin2.css";
+import "../admin/Styles/admin.css";
 import { peopleState } from "@/recoil/atoms";
 import axios from "axios";
 import { useRecoilState } from "recoil";
@@ -85,7 +85,7 @@ function Admin() {
               <span className="data-title">Team</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
-                  {data.team.length > 12
+                  {data.team !== undefined && data.team.length > 12
                     ? data.team.substring(0, 12) + "..."
                     : data.team}
                 </span>

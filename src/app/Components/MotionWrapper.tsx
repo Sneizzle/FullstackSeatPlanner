@@ -1,14 +1,20 @@
 import { useMap } from "react-leaflet";
 import L from "leaflet";
-import "leaflet.polyline.snakeanim";
 import { ConvertPointToCoord } from "./Helperman";
-import "leaflet";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { PersonConfig } from "@/app/admin/Interface/Interfaces";
+import "leaflet.polyline.snakeanim";
+import "leaflet";
 interface propsForCoordinates {
   coordinates: PersonConfig["markerCoords"];
+  height: number;
+  width: number;
 }
-const MotionWrapper = ({ coordinates, height, width }) => {
+const MotionWrapper: React.FC<propsForCoordinates> = ({
+  coordinates,
+  height,
+  width,
+}) => {
   const Map = useMap();
   useEffect(() => {
     const scaledCoordinates = coordinates.map((coord) => {
@@ -29,9 +35,9 @@ const MotionWrapper = ({ coordinates, height, width }) => {
     function snake() {
       route.snakeIn();
     }
-    route.on("snakestart snake snakeend", function (ev) {
-      console.log(ev.type);
-    });
+    // route.on("snakestart snake snakeend", function (ev) {
+    //   console.log(ev.type);
+    // });
     setTimeout(snake, 1);
   }, [Map, coordinates, height, width]);
 

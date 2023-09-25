@@ -1,5 +1,5 @@
 "use client";
-import LeafLetMapComponent from "@/Components/LeafLetMapComponent";
+import LeafLetMapComponent from "@/app/Components/LeafLetMapComponent";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PersonConfig } from "../admin/Interface/Interfaces";
@@ -18,7 +18,7 @@ const FindPerson = () => {
   }, []);
   const Map = useMemo(
     () =>
-      dynamic(() => import("@/Components/LeafLetMapComponent"), {
+      dynamic(() => import("@/app/Components/LeafLetMapComponent"), {
         loading: () => <p>A map is loading</p>,
         ssr: false,
       }),
