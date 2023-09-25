@@ -58,6 +58,8 @@ body.active-modal {
     padding: 10px 20px;
 }
 .map{
+  max-width: 45vw !important;
+  max-height: 90vh !important;
   position: absolute;
   top: 0;
   left: 0;
