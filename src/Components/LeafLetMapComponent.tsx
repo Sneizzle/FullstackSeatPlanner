@@ -7,6 +7,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { PersonConfig } from "@/app/admin2/Interfaces";
 import { ConvertPointToCoord } from "./Helperman";
+import MotionWrapper from "./MotionWrapper";
 
 interface propsForCoordinates {
   coordinates: PersonConfig["markerCoords"];
@@ -23,45 +24,45 @@ const LeafLetMapComponent = ({ coordinates }: propsForCoordinates) => {
     [height, width],
   ];
 
-  const [markerPosition, setMarkerPosition] = useState<LatLng | null>(null);
-  const [trailCoordinates, setTrailCoordinates] = useState<LatLng[]>([]);
-  const [routeFinished, setRouteFinished] = useState(false);
+  // const [markerPosition, setMarkerPosition] = useState<LatLng | null>(null);
+  // const [trailCoordinates, setTrailCoordinates] = useState<LatLng[]>([]);
+  // const [routeFinished, setRouteFinished] = useState(false);
 
-  // handle marker movement
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex < coordinates.length) {
-        // setMarkerPosition(coordinates[currentIndex]);
+  // // handle marker movement
+  // useEffect(() => {
+  //   let currentIndex = 0;
+  //   const interval = setInterval(() => {
+  //     if (currentIndex < coordinates.length) {
+  //       // setMarkerPosition(coordinates[currentIndex]);
 
-        const Coords = ConvertPointToCoord(coordinates[currentIndex], [
-          height,
-          width,
-        ]);
-        setMarkerPosition(new LatLng(Coords[0], Coords[1]));
-        currentIndex++;
-      } else {
-        currentIndex = 0;
-        setRouteFinished(true); // Mark the route as finished
-        clearInterval(interval);
-      }
-    }, 1000);
+  //       const Coords = ConvertPointToCoord(coordinates[currentIndex], [
+  //         height,
+  //         width,
+  //       ]);
+  //       setMarkerPosition(new LatLng(Coords[0], Coords[1]));
+  //       currentIndex++;
+  //     } else {
+  //       currentIndex = 0;
+  //       setRouteFinished(true); // Mark the route as finished
+  //       clearInterval(interval);
+  //     }
+  //   }, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [coordinates]);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [coordinates]);
 
-  // Handle trail coords
-  useEffect(() => {
-    if (markerPosition && !routeFinished) {
-      // Only update trail while the route is not finished
-      setTrailCoordinates((prevCoordinates) => [
-        ...prevCoordinates,
-        markerPosition,
-      ]);
-    }
-  }, [markerPosition, routeFinished]);
+  // // Handle trail coords
+  // useEffect(() => {
+  //   if (markerPosition && !routeFinished) {
+  //     // Only update trail while the route is not finished
+  //     setTrailCoordinates((prevCoordinates) => [
+  //       ...prevCoordinates,
+  //       markerPosition,
+  //     ]);
+  //   }
+  // }, [markerPosition, routeFinished]);
 
   return (
     <MapContainer
@@ -75,13 +76,11 @@ const LeafLetMapComponent = ({ coordinates }: propsForCoordinates) => {
       style={{ height, width }}
     >
       <ImageOverlay bounds={bounds} url="/officepicture.png" />
-
-      <Polyline positions={[]} color="blue" weight={2} />
-
-      {markerPosition && <Marker position={markerPosition}></Marker>}
-
-      {/* Create a visible trail */}
-      <Polyline positions={trailCoordinates} color="red" weight={2} />
+      <MotionWrapper
+        coordinates={coordinates}
+        height={height}
+        width={width}
+      ></MotionWrapper>
     </MapContainer>
   );
 };
