@@ -10,3 +10,5 @@ const ConvertPointToCoord=(points:number[], mapSize: number[])=>{
     return [lat, lng];
 }
 export{ConvertCoordToPoint, ConvertPointToCoord}
+
+export const GlobalFirstMarker = [0.00041662070790502863,0.1936472522680084];

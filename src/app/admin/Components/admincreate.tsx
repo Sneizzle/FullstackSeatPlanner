@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BsTools } from "react-icons/bs";
 import "../Styles/modalcreate.css";
+import { GlobalFirstMarker } from "@/app/Components/Helperman";
 
 export default function CreateModal() {
   const [modal, setModal] = useState(false);
@@ -20,7 +21,7 @@ export default function CreateModal() {
         location,
         team,
         checkbox,
-        markerCoords: [],
+        markerCoords: [GlobalFirstMarker],
       })
       .then(() => {
         window.location.reload();
