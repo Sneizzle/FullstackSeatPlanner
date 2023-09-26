@@ -24,7 +24,7 @@ export default function CreateModal() {
         markerCoords: [GlobalFirstMarker],
       })
       .then(() => {
-        window.location.reload();
+        // window.location.reload();
       });
   };
   return (

@@ -16,18 +16,16 @@ export default async function handler(req, res) {
   // }
 
 const rm = req.method;
-let dbResponse = null;
+
   switch (rm) {
     case 'POST':
-      dbResponse = await sql`
+      const dbResponse = await sql`
       insert into profiles (markerCoords, location, team, name, checkbox)
       values (${body.markerCoords},${body.location},${body.team},${body.name},${body.checkbox})
       returning *
     `;
-    console.log({dbResponse})
-   
-
-  break;
+    
+    return res.status(200).json( dbResponse );
   case 'PUT':
   //
   break;
@@ -50,5 +48,5 @@ let dbResponse = null;
   
 
  
-  return res.status(200).json({ data: `${dbResponse}` });
+
 }
