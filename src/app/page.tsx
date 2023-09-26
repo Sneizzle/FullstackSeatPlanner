@@ -24,6 +24,7 @@ function Home() {
       }
     }
   };
+
   useEffect(() => {
     axios
       .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
@@ -31,6 +32,7 @@ function Home() {
         setAPIData(response.data);
       });
   }, []);
+
   return (
     <body>
       <div className="background-image">
@@ -46,6 +48,7 @@ function Home() {
               data={APIData}
               onItemSelect={(item) => {
                 localStorage.setItem("searchedName", item.name);
+
                 window.location.href = "/FindPerson";
               }}
             />

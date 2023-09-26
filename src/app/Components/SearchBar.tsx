@@ -18,11 +18,9 @@ function SearchBar({
   const formatResult = (item: PersonConfig) => {
     return (
       <>
+        <span style={{ display: "block", textAlign: "left" }}>{item.name}</span>
         <span style={{ display: "block", textAlign: "left" }}>
-          name: {item.name}
-        </span>
-        <span style={{ display: "block", textAlign: "left" }}>
-          team: {item.team}
+          Team: {item.team}
         </span>
       </>
     );

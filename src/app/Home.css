@@ -28,11 +28,11 @@ body .background-image header h1 {
 .input-container h1{
     color: rgb(255, 255, 255);
     font-weight: 500;
-    font-size: 30px;
+    font-size: 50px;
     align-items: center;
     justify-content: center;
    color: #fff;
-   margin-bottom: 30px;
+   margin-bottom: 100px;
 }
 #visual {
     position: absolute;

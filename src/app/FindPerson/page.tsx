@@ -5,12 +5,21 @@ import React, { useEffect, useState } from "react";
 import { PersonConfig } from "../admin/Interface/Interfaces";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 const isPerson = (person: unknown): person is PersonConfig[] => {
   return true;
 };
 const FindPerson = () => {
   const [personData, setPersonData] = useState<PersonConfig | null>(null);
   const [searched, setSearched] = useState<string | null>(null);
+  //redirects user to frontpage
+  const router = useRouter();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push("/");
+    }, 60000);
+    return () => clearTimeout(timer);
+  });
 
   useEffect(() => {
     const searchedName = localStorage.getItem("searchedName");
