@@ -1,26 +1,54 @@
-// import sql from "@/db";
+import sql from "@/db";
 
-// export default async function handler(req, res) {
-//   // Get data submitted in request's body.
-//   const body = req.body;
+export default async function handler(req, res) {
+  // Get data submitted in request's body.
+  const body = req.body;
 
-//   // Optional logging to see the responses
-//   // in the command line where next.js app is running.
-//   console.log("body: ", body);
+  // Optional logging to see the responses
+  // in the command line where next.js app is running.
+  console.log("body: ", body);
 
-//   // Guard clause checks for first and last name,
-//   // and returns early if they are not found
-//   if (!body.first) {
-//     // Sends a HTTP bad request error code
-//     return res.status(400).json({ data: "First or last name not found" });
-//   }
+  // Guard clause checks for first and last name,
+  // and returns early if they are not found
+  // if (!body.first) {
+  //   // Sends a HTTP bad request error code
+  //   return res.status(400).json({ data: "First or last name not found" });
+  // }
 
-//   const xs = await sql`
-//   insert into testingtabledb (name)
-//   values (${body.first})
+const rm = req.method;
+let dbResponse = null;
+  switch (rm) {
+    case 'POST':
+      dbResponse = await sql`
+      insert into profiles (markerCoords, location, team, name, checkbox)
+      values (${body.markerCoords},${body.location},${body.team},${body.name},${body.checkbox})
+      returning *
+    `;
+    console.log({dbResponse})
+   
 
-//   returning *
-// `;
+  break;
+  case 'PUT':
+  //
+  break;
+  case 'GET':
+  //
+  break;
+  case 'DELETE':
 
-//   res.status(200).json({ data: `${xs.name}` });
-// }
+  default:
+    console.log("something went wrong.")
+  }
+
+
+
+  // if (req.method === 'POST') {
+  //   // Process a POST request
+  // } else if (req.method ==='PATCH') {
+    
+  // } else if (reQ)
+  
+
+ 
+  return res.status(200).json({ data: `${dbResponse}` });
+}

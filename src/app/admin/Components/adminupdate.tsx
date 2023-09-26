@@ -3,6 +3,7 @@ import axios from "axios";
 import "../Styles/modalcreate.css";
 import { useEffect, useState } from "react";
 import { HandleUpdateFunction, PersonConfig } from "../Interface/Interfaces";
+import { GlobalApiUrlWithId } from "@/app/Components/Helperman";
 interface propsUpdateModal {
   data: PersonConfig;
   onUpdate: HandleUpdateFunction;
@@ -22,7 +23,7 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
 
   const UpdateAPIData = () => {
     axios
-      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
+      .put(GlobalApiUrlWithId(id), {
         name,
         location,
         team,

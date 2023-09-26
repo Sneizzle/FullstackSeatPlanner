@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { GlobalApiUrlWithId } from "../Components/Helperman";
 function UpdatePage() {
   const { push } = useRouter();
 
@@ -31,7 +32,7 @@ function UpdatePage() {
 
   const UpdateAPIData = () => {
     axios
-      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
+      .put(GlobalApiUrlWithId(id), {
         name,
         location,
         team,

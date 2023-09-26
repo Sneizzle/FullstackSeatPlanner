@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import CreateModal from "./Components/admincreate";
 import UpdateModal from "./Components/adminupdate";
 import ReturnButton from "./returnButton";
+import { GlobalApiUrl, GlobalApiUrlWithId } from "../Components/Helperman";
 
 function Admin() {
   const [people, setPeople] = useRecoilState(peopleState);
@@ -21,18 +22,14 @@ function Admin() {
     getData();
   };
   const onDelete = (id: number) => {
-    axios
-      .delete(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`)
-      .then(() => {
-        getData();
-      });
+    axios.delete(GlobalApiUrlWithId(id)).then(() => {
+      getData();
+    });
   };
   const getData = () => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/`)
-      .then((getData) => {
-        setPeople(getData.data);
-      });
+    axios.get(GlobalApiUrl).then((getData) => {
+      setPeople(getData.data);
+    });
   };
   return (
     <div className="content-container">

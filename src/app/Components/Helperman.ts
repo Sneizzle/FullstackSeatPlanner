@@ -10,5 +10,9 @@ const ConvertPointToCoord=(points:number[], mapSize: number[])=>{
     return [lat, lng];
 }
 export{ConvertCoordToPoint, ConvertPointToCoord}
-
 export const GlobalFirstMarker = [0.00041662070790502863,0.1936472522680084] as const;
+// export const GlobalApiUrl = "https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData"
+export const GlobalApiUrl = "/api/testendpoint"
+export const GlobalApiUrlWithId=(id: number)=>`${GlobalApiUrl}/${id}`
+
+

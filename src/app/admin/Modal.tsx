@@ -10,7 +10,7 @@ import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
-import { GlobalFirstMarker } from "../Components/Helperman";
+import { GlobalApiUrlWithId, GlobalFirstMarker } from "../Components/Helperman";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
@@ -48,19 +48,19 @@ export default function Modal({ handleUpdate }: ModalProps) {
     return addMarkerMode && listPerson.id === person?.id;
   };
   const SaveRoute = () => {
-    axios.put(
-      `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person?.id}`,
-      {
-        ...person,
-        checkbox: true,
-      }
-    );
+    if (undefined === person) {
+      return;
+    }
+    axios.put(GlobalApiUrlWithId(person.id), {
+      ...person,
+      checkbox: true,
+    });
     toggleAddMarkerMode();
     setPerson(undefined);
   };
   const unassignSeat = (id: number) => {
     axios
-      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
+      .put(GlobalApiUrlWithId(id), {
         markerCoords: [GlobalFirstMarker],
         checkbox: false,
       })

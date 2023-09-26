@@ -6,6 +6,7 @@ import { PersonConfig } from "../admin/Interface/Interfaces";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { GlobalApiUrl } from "../Components/Helperman";
 const isPerson = (person: unknown): person is PersonConfig[] => {
   return true;
 };
@@ -37,19 +38,17 @@ const FindPerson = () => {
     if (null === searched) {
       return;
     }
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
-      .then((response) => {
-        if (isPerson(response.data)) {
-          const matchingPerson = response.data.find(
-            (person) => person.name === searched
-          );
-          if (matchingPerson) {
-            // If the person is found, set their data in the state
-            setPersonData(matchingPerson);
-          }
+    axios.get(GlobalApiUrl).then((response) => {
+      if (isPerson(response.data)) {
+        const matchingPerson = response.data.find(
+          (person) => person.name === searched
+        );
+        if (matchingPerson) {
+          // If the person is found, set their data in the state
+          setPersonData(matchingPerson);
         }
-      });
+      }
+    });
   }, [searched]);
 
   return (
