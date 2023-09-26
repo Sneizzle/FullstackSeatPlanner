@@ -5,6 +5,7 @@ import Background from "./Background";
 import SearchBar from "./Components/SearchBar";
 import { useEffect, useState } from "react";
 import { PersonConfig } from "./admin/Interface/Interfaces";
+
 function Home() {
   const [message, setMessage] = useState("");
   const [updated, setUpdated] = useState("");
@@ -46,6 +47,7 @@ function Home() {
               data={APIData}
               onItemSelect={(item) => {
                 localStorage.setItem("searchedName", item.name);
+
                 window.location.href = "/FindPerson";
               }}
             />
