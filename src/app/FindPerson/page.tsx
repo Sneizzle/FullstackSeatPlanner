@@ -20,7 +20,7 @@ const FindPerson = () => {
     }, 60000);
     return () => clearTimeout(timer);
   });
-
+  ////////////////////////////////
   useEffect(() => {
     const searchedName = localStorage.getItem("searchedName");
     setSearched(searchedName);
