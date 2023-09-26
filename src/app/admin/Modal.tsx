@@ -10,6 +10,7 @@ import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
+import { GlobalFirstMarker } from "../Components/Helperman";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
@@ -60,7 +61,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
   const unassignSeat = (id: number) => {
     axios
       .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
-        markerCoords: [],
+        markerCoords: [GlobalFirstMarker],
         checkbox: false,
       })
       .then((response) => {
