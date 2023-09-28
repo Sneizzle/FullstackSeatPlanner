@@ -45,7 +45,7 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
         <div className={`modal ${modal ? "active" : ""}`}>
           <div onClick={toggleupdateModal} className="overlay"></div>
           <div className="createmodal-content">
-            <button className="close-modal" onClick={toggleupdateModal}>
+            <button className="close-modal-2" onClick={toggleupdateModal}>
               Close Window
             </button>
             <div className="create-form">

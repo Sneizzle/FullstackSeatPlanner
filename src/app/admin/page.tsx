@@ -103,7 +103,7 @@ function Admin() {
                 </span>
               ))}
             </div>
-            <div className="data update">
+            <div id="updatething" className="data update">
               <span className="data-title">Update Info</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
