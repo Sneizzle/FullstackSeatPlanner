@@ -4,6 +4,7 @@ export default async function handler(req, res) {
   // Get data submitted in request's body.
   const body = req.body;
 
+
   // Optional logging to see the responses
   // in the command line where next.js app is running.
   console.log("body: ", body);
@@ -19,21 +20,29 @@ const rm = req.method;
 
   switch (rm) {
     case 'POST':
-      const dbResponse = await sql`
-      insert into profiles (markerCoords, location, team, name, checkbox)
+      const dbPostResponse = await sql`
+      INSERT into profiles (markerCoords, location, team, name, checkbox)
       values (${body.markerCoords},${body.location},${body.team},${body.name},${body.checkbox})
       returning *
     `;
     
-    return res.status(200).json( dbResponse );
+    return res.status(200).json( dbPostResponse );
   case 'PUT':
-  //
+  // anvend patch request i stedet.  
   break;
   case 'GET':
-  //
+    const dbGetResponse = await sql`
+    SELECT markercoords, location, team, name, checkbox FROM profiles`;
+  console.log({dbGetResponse})
+  res.status(200).json( dbGetResponse );
+  
   break;
   case 'DELETE':
-
+    const dbDeleteResponse = await sql`
+    DELETE FROM profiles 
+    WHERE id = ${body.id}
+    returning *`;
+  break;
   default:
     console.log("something went wrong.")
   }
