@@ -118,7 +118,7 @@ function Admin() {
                     style={{ color: "red" }}
                     onClick={() => onDelete(data.id)}
                   >
-                    Delete{" "}
+                    Delete {data.id}
                     {data.name.length > 12
                       ? data.name.substring(0, 12) + "..."
                       : data.name}{" "}
