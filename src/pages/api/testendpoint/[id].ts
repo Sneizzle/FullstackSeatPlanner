@@ -26,13 +26,13 @@ console.log(req.query.id)
     const dbUpdateResponse = await sql`
     UPDATE profiles
     SET
-      markercoords = ${body.markercoords},
+      markercoords = ${body.markerCoords},
       location = ${body.location},
       team = ${body.team},
       name = ${body.name},
       checkbox = ${body.checkbox}
-    WHERE id = ${id};
-    `  
+    WHERE id = ${id}
+    returning *`;  
   break;
  
   case 'DELETE':

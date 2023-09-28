@@ -61,6 +61,7 @@ function LeafLetAdminComponent({
         if (undefined === prevState) {
           return prevState;
         }
+        console.log(typeof prevState.markerCoords);
         return {
           ...prevState,
           markerCoords: [...prevState.markerCoords, arraything],
