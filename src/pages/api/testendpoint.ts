@@ -31,7 +31,7 @@ const rm = req.method;
  
   case 'GET':
       const dbGetResponse = await sql`
-      SELECT * FROM profiles`;
+      SELECT * FROM profiles order by id`;
     
      
     res.status(200).json( dbGetResponse );

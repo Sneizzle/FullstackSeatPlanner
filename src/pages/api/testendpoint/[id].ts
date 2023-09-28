@@ -33,6 +33,7 @@ const rm = req.method;
       checkbox = ${body.checkbox}
     WHERE id = ${id}
     returning *`;  
+    res.status(200).json( dbUpdateResponse );
   break;
  
   case 'DELETE':

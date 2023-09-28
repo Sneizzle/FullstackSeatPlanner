@@ -10,7 +10,11 @@ import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
-import { GlobalApiUrlWithId, GlobalFirstMarker } from "../Components/Helperman";
+import {
+  GlobalApiUrl,
+  GlobalApiUrlWithId,
+  GlobalFirstMarker,
+} from "../Components/Helperman";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
@@ -47,13 +51,24 @@ export default function Modal({ handleUpdate }: ModalProps) {
     return addMarkerMode && listPerson.id === person?.id;
   };
   const SaveRoute = () => {
-    if (undefined === person) {
+    // if (undefined === person) {
+    //   return;
+    // }
+    if (undefined === person || person.markercoords.length < 2) {
+      toggleAddMarkerMode();
+      setPerson(undefined);
       return;
     }
-    axios.put(GlobalApiUrlWithId(person.id), {
-      ...person,
-      checkbox: true,
-    });
+    axios
+      .put(GlobalApiUrlWithId(person.id), {
+        ...person,
+        checkbox: true,
+      })
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
+        });
+      });
     toggleAddMarkerMode();
     setPerson(undefined);
   };
@@ -64,13 +79,17 @@ export default function Modal({ handleUpdate }: ModalProps) {
         markercoords: [GlobalFirstMarker],
         checkbox: false,
       })
-      .then((response) => {
-        setPeople((prevState) => {
-          const index = prevState.findIndex((data) => data.id === id);
-          const newState = [...prevState];
-          newState[index] = response.data;
-          return newState;
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
         });
+
+        // setPeople((prevState) => {
+        //   const index = prevState.findIndex((data) => data.id === id);
+        //   const newState = [...prevState];
+        //   newState[index] = response.data;
+        //   return newState;
+        // });
         setPerson(undefined);
       });
   };
@@ -136,7 +155,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
                                 </i>
                               </button>
                             )}
-                            {person.checkbox && (
+                            {person.checkbox && !addMarkerMode && (
                               <button
                                 className="action-button-delete"
                                 onClick={() => unassignSeat(person)}
