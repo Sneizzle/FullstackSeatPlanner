@@ -37,10 +37,9 @@ const MotionWrapper: React.FC<propsForCoordinates> = ({
 
     Map.addLayer(route);
 
-    function snake() {
-      route.snakeIn();
-    }
-    snake, 1;
+    route.snakeIn();
+
+    //  setTimeout(snake, 1);
   }, [Map, coordinates, height, width]);
 
   return null;

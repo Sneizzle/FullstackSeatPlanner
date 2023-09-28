@@ -15,7 +15,7 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
   const toggleupdateModal = () => {
     setModal(!modal);
   };
-  const [id, setID] = useState<number | null>(data.id);
+  const [id, setID] = useState<number>(data.id);
   const [name, setName] = useState(data.name || "");
   const [location, setLocation] = useState(data.location || "");
   const [team, setTeam] = useState(data.team || "");

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { BsFillPeopleFill, BsSpeedometer } from "react-icons/bs";
 import "../admin/Styles/admin.css";
 import { peopleState } from "@/recoil/atoms";
@@ -14,21 +14,22 @@ import { GlobalApiUrl, GlobalApiUrlWithId } from "../Components/Helperman";
 
 function Admin() {
   const [people, setPeople] = useRecoilState(peopleState);
+
+  const getData = useCallback(() => {
+    axios.get(GlobalApiUrl).then((getData) => {
+      setPeople(getData.data);
+    });
+  }, [setPeople]);
   // const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
   const handleUpdate: HandleUpdateFunction = () => {
     getData();
   };
   const onDelete = (id: number) => {
     axios.delete(GlobalApiUrlWithId(id)).then(() => {
       getData();
-    });
-  };
-  const getData = () => {
-    axios.get(GlobalApiUrl).then((getData) => {
-      setPeople(getData.data);
     });
   };
 

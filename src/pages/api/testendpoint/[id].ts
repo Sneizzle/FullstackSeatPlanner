@@ -1,9 +1,12 @@
+import { PersonConfig } from "@/app/admin/Interface/Interfaces";
 import sql from "@/db";
-
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from 'next'
+export default async function handler(req: NextApiRequest, res:NextApiResponse) {
   // Get data submitted in request's body.
-    const body = req.body;
-    const id = req.query.id;
+  const body = req.body as PersonConfig;
+ 
+
+    const id = req.query.id as string;
 
 
   // Optional logging to see the responses
@@ -28,7 +31,7 @@ const rm = req.method;
     SET
       markercoords = ${body.markercoords},
       location = ${body.location},
-      team = ${body.team},
+      team = ${body.team??null},
       name = ${body.name},
       checkbox = ${body.checkbox}
     WHERE id = ${id}

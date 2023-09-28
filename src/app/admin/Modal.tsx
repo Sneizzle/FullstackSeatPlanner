@@ -51,9 +51,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
     return addMarkerMode && listPerson.id === person?.id;
   };
   const SaveRoute = () => {
-    // if (undefined === person) {
-    //   return;
-    // }
     if (undefined === person || person.markercoords.length < 2) {
       toggleAddMarkerMode();
       setPerson(undefined);
@@ -72,7 +69,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
     toggleAddMarkerMode();
     setPerson(undefined);
   };
-  const unassignSeat = (person) => {
+  const unassignSeat = (person: PersonConfig) => {
     axios
       .put(GlobalApiUrlWithId(person.id), {
         ...person,
@@ -83,13 +80,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
         axios.get(GlobalApiUrl).then((getData) => {
           setPeople(getData.data);
         });
-
-        // setPeople((prevState) => {
-        //   const index = prevState.findIndex((data) => data.id === id);
-        //   const newState = [...prevState];
-        //   newState[index] = response.data;
-        //   return newState;
-        // });
         setPerson(undefined);
       });
   };
@@ -159,7 +149,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
                               <button
                                 className="action-button-delete"
                                 onClick={() => unassignSeat(person)}
-                                disabled={IsButtonDisabled(person)}
                               >
                                 Delete Route
                               </button>
