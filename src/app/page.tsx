@@ -5,6 +5,7 @@ import Background from "./Background";
 import SearchBar from "./Components/SearchBar";
 import { useEffect, useState } from "react";
 import { PersonConfig } from "./admin/Interface/Interfaces";
+import { GlobalApiUrl } from "./Components/Helperman";
 function Home() {
   const [message, setMessage] = useState("");
   const [updated, setUpdated] = useState("");
@@ -26,11 +27,9 @@ function Home() {
   };
 
   useEffect(() => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
-      .then((response) => {
-        setAPIData(response.data);
-      });
+    axios.get(GlobalApiUrl).then((response) => {
+      setAPIData(response.data);
+    });
   }, []);
 
   return (

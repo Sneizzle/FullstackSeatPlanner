@@ -10,7 +10,11 @@ import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
-import { GlobalFirstMarker } from "../Components/Helperman";
+import {
+  GlobalApiUrl,
+  GlobalApiUrlWithId,
+  GlobalFirstMarker,
+} from "../Components/Helperman";
 interface ModalProps {
   handleUpdate: () => void; // Specify the type for handleUpdate
 }
@@ -34,7 +38,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
   };
 
   const IsButtonDisabled = (listPerson: PersonConfig) => {
-    // console.log(person?.id, "tekst til og finde den");
     return person?.id !== undefined && listPerson.id !== person?.id;
   };
   const defineSeat = (person: PersonConfig) => {
@@ -48,28 +51,34 @@ export default function Modal({ handleUpdate }: ModalProps) {
     return addMarkerMode && listPerson.id === person?.id;
   };
   const SaveRoute = () => {
-    axios.put(
-      `https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${person?.id}`,
-      {
+    if (undefined === person || person.markercoords.length < 2) {
+      toggleAddMarkerMode();
+      setPerson(undefined);
+      return;
+    }
+    axios
+      .put(GlobalApiUrlWithId(person.id), {
         ...person,
         checkbox: true,
-      }
-    );
+      })
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
+        });
+      });
     toggleAddMarkerMode();
     setPerson(undefined);
   };
-  const unassignSeat = (id: number) => {
+  const unassignSeat = (person: PersonConfig) => {
     axios
-      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
-        markerCoords: [GlobalFirstMarker],
+      .put(GlobalApiUrlWithId(person.id), {
+        ...person,
+        markercoords: [GlobalFirstMarker],
         checkbox: false,
       })
-      .then((response) => {
-        setPeople((prevState) => {
-          const index = prevState.findIndex((data) => data.id === id);
-          const newState = [...prevState];
-          newState[index] = response.data;
-          return newState;
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
         });
         setPerson(undefined);
       });
@@ -136,11 +145,10 @@ export default function Modal({ handleUpdate }: ModalProps) {
                                 </i>
                               </button>
                             )}
-                            {person.checkbox && (
+                            {person.checkbox && !addMarkerMode && (
                               <button
                                 className="action-button-delete"
-                                onClick={() => unassignSeat(person.id)}
-                                disabled={IsButtonDisabled(person)}
+                                onClick={() => unassignSeat(person)}
                               >
                                 Delete Route
                               </button>

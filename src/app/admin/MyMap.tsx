@@ -61,9 +61,10 @@ function LeafLetAdminComponent({
         if (undefined === prevState) {
           return prevState;
         }
+
         return {
           ...prevState,
-          markerCoords: [...prevState.markerCoords, arraything],
+          markercoords: [...prevState.markercoords, arraything],
         };
       });
       setPeople((prevState) => {
@@ -71,7 +72,7 @@ function LeafLetAdminComponent({
         const current = data.findIndex((entry) => entry.id === person?.id);
         const newData = {
           ...data[current],
-          markerCoords: [...data[current].markerCoords, arraything],
+          markercoords: [...data[current].markercoords, arraything],
           checkbox: true,
         };
         data[current] = newData;

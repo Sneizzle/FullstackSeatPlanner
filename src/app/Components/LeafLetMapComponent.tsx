@@ -10,7 +10,7 @@ import { ConvertPointToCoord } from "./Helperman";
 import MotionWrapper from "./MotionWrapper";
 
 interface propsForCoordinates {
-  coordinates: PersonConfig["markerCoords"];
+  coordinates: PersonConfig["markercoords"];
 }
 const LeafLetMapComponent = ({ coordinates }: propsForCoordinates) => {
   const height: number = Math.min(

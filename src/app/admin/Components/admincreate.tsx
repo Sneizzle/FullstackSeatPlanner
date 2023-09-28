@@ -3,9 +3,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BsTools } from "react-icons/bs";
 import "../Styles/modalcreate.css";
-import { GlobalFirstMarker } from "@/app/Components/Helperman";
+import { GlobalApiUrl, GlobalFirstMarker } from "@/app/Components/Helperman";
+import { HandleUpdateFunction } from "../Interface/Interfaces";
 
-export default function CreateModal() {
+interface propsUpdateModal {
+  onUpdate: HandleUpdateFunction;
+}
+export default function CreateModal({ onUpdate }: propsUpdateModal) {
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
@@ -16,15 +20,16 @@ export default function CreateModal() {
   const [checkbox, setCheckbox] = useState(false);
   const postData = () => {
     axios
-      .post("https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData", {
+      .post(GlobalApiUrl, {
         name,
         location,
         team,
         checkbox,
-        markerCoords: [GlobalFirstMarker],
+        markercoords: [GlobalFirstMarker],
       })
       .then(() => {
-        window.location.reload();
+        onUpdate();
+        toggleModal();
       });
   };
   return (

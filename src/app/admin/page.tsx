@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { BsFillPeopleFill, BsSpeedometer } from "react-icons/bs";
 import "../admin/Styles/admin.css";
 import { peopleState } from "@/recoil/atoms";
@@ -10,30 +10,29 @@ import Modal from "./Modal";
 import CreateModal from "./Components/admincreate";
 import UpdateModal from "./Components/adminupdate";
 import ReturnButton from "./returnButton";
+import { GlobalApiUrl, GlobalApiUrlWithId } from "../Components/Helperman";
 
 function Admin() {
   const [people, setPeople] = useRecoilState(peopleState);
+
+  const getData = useCallback(() => {
+    axios.get(GlobalApiUrl).then((getData) => {
+      setPeople(getData.data);
+    });
+  }, [setPeople]);
   // const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
   const handleUpdate: HandleUpdateFunction = () => {
     getData();
   };
   const onDelete = (id: number) => {
-    axios
-      .delete(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`)
-      .then(() => {
-        getData();
-      });
+    axios.delete(GlobalApiUrlWithId(id)).then(() => {
+      getData();
+    });
   };
-  const getData = () => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/`)
-      .then((getData) => {
-        setPeople(getData.data);
-      });
-  };
+
   return (
     <div className="content-container">
       <div className="dash-content">
@@ -48,7 +47,7 @@ function Admin() {
 
         <div className="boxes">
           <ReturnButton />
-          <CreateModal />
+          <CreateModal onUpdate={handleUpdate} />
           <Modal handleUpdate={handleUpdate} />
         </div>
         <div className="activity">
@@ -104,7 +103,7 @@ function Admin() {
                 </span>
               ))}
             </div>
-            <div className="data update">
+            <div id="updatething" className="data update">
               <span className="data-title">Update Info</span>
               {people.map((data) => (
                 <span className="data-list" key={data.id}>
@@ -120,7 +119,7 @@ function Admin() {
                     style={{ color: "red" }}
                     onClick={() => onDelete(data.id)}
                   >
-                    Delete{" "}
+                    Delete {data.id}
                     {data.name.length > 12
                       ? data.name.substring(0, 12) + "..."
                       : data.name}{" "}
