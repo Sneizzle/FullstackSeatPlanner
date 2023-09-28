@@ -58,9 +58,10 @@ export default function Modal({ handleUpdate }: ModalProps) {
     toggleAddMarkerMode();
     setPerson(undefined);
   };
-  const unassignSeat = (id: number) => {
+  const unassignSeat = (person) => {
     axios
-      .put(GlobalApiUrlWithId(id), {
+      .put(GlobalApiUrlWithId(person.id), {
+        ...person,
         markerCoords: [GlobalFirstMarker],
         checkbox: false,
       })
@@ -139,7 +140,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
                             {person.checkbox && (
                               <button
                                 className="action-button-delete"
-                                onClick={() => unassignSeat(person.id)}
+                                onClick={() => unassignSeat(person)}
                                 disabled={IsButtonDisabled(person)}
                               >
                                 Delete Route

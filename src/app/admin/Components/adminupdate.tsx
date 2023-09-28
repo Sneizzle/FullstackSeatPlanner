@@ -24,6 +24,7 @@ export default function UpdateModal({ data, onUpdate }: propsUpdateModal) {
   const UpdateAPIData = () => {
     axios
       .put(GlobalApiUrlWithId(id), {
+        ...data,
         name,
         location,
         team,

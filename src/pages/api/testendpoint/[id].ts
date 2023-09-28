@@ -23,7 +23,16 @@ console.log(req.query.id)
     switch (rm) {
    
   case 'PUT':
-    // anvend patch request i stedet.  
+    const dbUpdateResponse = await sql`
+    UPDATE profiles
+    SET
+      markercoords = ${body.markercoords},
+      location = ${body.location},
+      team = ${body.team},
+      name = ${body.name},
+      checkbox = ${body.checkbox}
+    WHERE id = ${id};
+    `  
   break;
  
   case 'DELETE':

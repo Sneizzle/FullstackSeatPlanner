@@ -16,3 +16,4 @@ export const GlobalApiUrl = "/api/testendpoint"
 export const GlobalApiUrlWithId=(id: number)=>`${GlobalApiUrl}/${id}`
 
 
+
