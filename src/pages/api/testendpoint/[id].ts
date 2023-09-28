@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   // }
 
 const rm = req.method;
-console.log(req.query.id)
+
 
     switch (rm) {
    
@@ -26,7 +26,7 @@ console.log(req.query.id)
     const dbUpdateResponse = await sql`
     UPDATE profiles
     SET
-      markercoords = ${body.markerCoords},
+      markercoords = ${body.markercoords},
       location = ${body.location},
       team = ${body.team},
       name = ${body.name},
@@ -41,14 +41,15 @@ console.log(req.query.id)
       returning *`;
      
       res.status(200).json( dbDeleteResponse );
-      console.log("deletelog message")
+      
   break;
 
 
 
 
   default:
-    console.log("something went wrong.")
+    return res.status(405);
+    
   }
 
 

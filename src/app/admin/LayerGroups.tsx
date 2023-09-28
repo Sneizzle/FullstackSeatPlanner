@@ -14,7 +14,7 @@ const LayerGroups: React.FC<propsForDimensions> = ({ height, width }) => {
 
   return (
     <LayerGroup>
-      {person?.markerCoords?.map((coords, index) => {
+      {person?.markercoords?.map((coords, index) => {
         if (!coords || coords.length !== 2) return null;
         const Coords = ConvertPointToCoord(coords, [height, width]);
         const position: LatLngTuple = [Coords[0], Coords[1]];

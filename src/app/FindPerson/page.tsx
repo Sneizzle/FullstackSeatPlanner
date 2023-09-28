@@ -43,6 +43,7 @@ const FindPerson = () => {
         const matchingPerson = response.data.find(
           (person) => person.name === searched
         );
+
         if (matchingPerson) {
           // If the person is found, set their data in the state
           setPersonData(matchingPerson);
@@ -52,7 +53,7 @@ const FindPerson = () => {
   }, [searched]);
 
   return (
-    <div>{personData && <Map coordinates={personData.markerCoords}></Map>}</div>
+    <div>{personData && <Map coordinates={personData.markercoords}></Map>}</div>
   );
 };
 

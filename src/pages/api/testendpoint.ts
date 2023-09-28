@@ -23,7 +23,7 @@ const rm = req.method;
     case 'POST':
         const dbPostResponse = await sql`
         INSERT INTO profiles (markercoords, location, team, name, checkbox)
-        values (${body.markerCoords},${body.location},${body.team},${body.name},${body.checkbox})
+        values (${body.markercoords},${body.location},${body.team},${body.name},${body.checkbox})
         returning *
       `;
       
@@ -33,7 +33,7 @@ const rm = req.method;
       const dbGetResponse = await sql`
       SELECT * FROM profiles`;
     
-      console.log(dbGetResponse.map((data)=>{return data.markerCoords}))
+     
     res.status(200).json( dbGetResponse );
     
   break;
@@ -42,7 +42,8 @@ const rm = req.method;
 
 
   default:
-    console.log("something went wrong.")
+    return res.status(405);
+   
   }
 
 

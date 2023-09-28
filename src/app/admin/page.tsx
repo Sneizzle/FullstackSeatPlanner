@@ -31,7 +31,7 @@ function Admin() {
       setPeople(getData.data);
     });
   };
-  console.log({ people });
+
   return (
     <div className="content-container">
       <div className="dash-content">

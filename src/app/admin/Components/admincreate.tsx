@@ -21,7 +21,7 @@ export default function CreateModal() {
         location,
         team,
         checkbox,
-        markerCoords: [GlobalFirstMarker],
+        markercoords: [GlobalFirstMarker],
       })
       .then(() => {
         // window.location.reload();

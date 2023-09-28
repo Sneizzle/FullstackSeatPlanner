@@ -34,7 +34,6 @@ export default function Modal({ handleUpdate }: ModalProps) {
   };
 
   const IsButtonDisabled = (listPerson: PersonConfig) => {
-    // console.log(person?.id, "tekst til og finde den");
     return person?.id !== undefined && listPerson.id !== person?.id;
   };
   const defineSeat = (person: PersonConfig) => {
@@ -62,7 +61,7 @@ export default function Modal({ handleUpdate }: ModalProps) {
     axios
       .put(GlobalApiUrlWithId(person.id), {
         ...person,
-        markerCoords: [GlobalFirstMarker],
+        markercoords: [GlobalFirstMarker],
         checkbox: false,
       })
       .then((response) => {

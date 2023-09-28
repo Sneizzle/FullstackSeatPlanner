@@ -6,7 +6,7 @@ import { PersonConfig } from "@/app/admin/Interface/Interfaces";
 import "leaflet.polyline.snakeanim";
 import "leaflet";
 interface propsForCoordinates {
-  coordinates: PersonConfig["markerCoords"];
+  coordinates: PersonConfig["markercoords"];
   height: number;
   width: number;
 }
@@ -17,6 +17,11 @@ const MotionWrapper: React.FC<propsForCoordinates> = ({
 }) => {
   const Map = useMap();
   useEffect(() => {
+    // Check if coordinates is an array before mapping over it
+    if (!Array.isArray(coordinates)) {
+      return;
+    }
+
     const scaledCoordinates = coordinates.map((coord) => {
       const scaled = ConvertPointToCoord(coord, [height, width]);
       return L.latLng(scaled[0], scaled[1]);
@@ -35,10 +40,7 @@ const MotionWrapper: React.FC<propsForCoordinates> = ({
     function snake() {
       route.snakeIn();
     }
-    // route.on("snakestart snake snakeend", function (ev) {
-    //   console.log(ev.type);
-    // });
-    setTimeout(snake, 1);
+    snake, 1;
   }, [Map, coordinates, height, width]);
 
   return null;
