@@ -1,6 +1,16 @@
-![](./public/testnavn.gif)
+![](./public/Demo1.gif)
+![](./public/Demo2.gif)
 
-## Getting Started
+## Features
+
+React project ported to Next.js and further developed.
+CRUD functionalities for profiles of people.
+API endpoints.
+SQL datastorage.
+Using Leaflet you can draw animated routes to where people are sitting.
+Recoil for state management. To avoid crazy propdrilling.
+
+## Installation / Getting Started
 
 ### First:
 
