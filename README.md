@@ -2,10 +2,21 @@
 
 ## Getting Started
 
-First, Clone the project.
-Second, Install and run Docker Desktop.
-Third. Use the .env.dist as a template to set up your own private .env - fill out the format according to what you've used on Docker - Desktop for a good connection.
-Finally run these 3 commands in terminal:
+### First:
+
+Clone the project.
+
+### Second:
+
+Install and run Docker Desktop.
+
+### Third:
+
+Use the .env.dist as a template to set up your own private .env - fill out the format according to what you've used on Docker - Desktop for a good connection.
+
+### Finally:
+
+run these 3 commands in terminal:
 
 ```bash
 npm install
