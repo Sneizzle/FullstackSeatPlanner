@@ -1,142 +1,169 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import "./Modal.css";
-import { BsTools } from "react-icons/bs";
+import { Fragment, useState } from "react";
+import "./Styles/Modal.css";
 // import MyMap from "./MyMap";
-import { Button, Table } from "semantic-ui-react";
-import Read from "./Read";
-import axios from "axios";
 import { peopleState, personState } from "@/recoil/atoms";
+import axios from "axios";
+import { AiFillEdit } from "react-icons/Ai";
 import { useRecoilState } from "recoil";
-import { PersonConfig } from "./Interfaces";
+import { PersonConfig } from "./Interface/Interfaces";
 import MyMap from "./MyMap";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
+import {
+  GlobalApiUrl,
+  GlobalApiUrlWithId,
+  GlobalFirstMarker,
+} from "../Components/Helperman";
+interface ModalProps {
+  handleUpdate: () => void; // Specify the type for handleUpdate
+}
 
-export default function Modal() {
+export default function Modal({ handleUpdate }: ModalProps) {
   const [person, setPerson] = useRecoilState(personState);
   const [people, setPeople] = useRecoilState(peopleState);
   const [modal, setModal] = useState(false);
   const [addMarkerMode, setAddMarkerMode] = useState(false);
-  const [assignSeatMode, setAssignSeatMode] = useState(false);
-  const toggleAssignSeatMode = () => {
-    setAssignSeatMode((prevState) => !prevState);
-  };
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("@/app/admin/MyMap"), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  );
   const toggleAddMarkerMode = () => {
     setAddMarkerMode((prevState) => !prevState);
   };
+
+  const IsButtonDisabled = (listPerson: PersonConfig) => {
+    return person?.id !== undefined && listPerson.id !== person?.id;
+  };
   const defineSeat = (person: PersonConfig) => {
-    toggleAssignSeatMode();
     toggleAddMarkerMode();
     setPerson(person);
   };
-
-  const unassignSeat = (id) => {
+  const defineSeat2 = (person: PersonConfig) => {
+    setPerson(person);
+  };
+  const IsActiveButton = (listPerson: PersonConfig) => {
+    return addMarkerMode && listPerson.id === person?.id;
+  };
+  const SaveRoute = () => {
+    if (undefined === person || person.markercoords.length < 2) {
+      toggleAddMarkerMode();
+      setPerson(undefined);
+      return;
+    }
     axios
-      .put(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData/${id}`, {
-        markerCoords: [],
+      .put(GlobalApiUrlWithId(person.id), {
+        ...person,
+        checkbox: true,
+      })
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
+        });
+      });
+    toggleAddMarkerMode();
+    setPerson(undefined);
+  };
+  const unassignSeat = (person: PersonConfig) => {
+    axios
+      .put(GlobalApiUrlWithId(person.id), {
+        ...person,
+        markercoords: [GlobalFirstMarker],
         checkbox: false,
       })
-      .then((response) => {
-        setPeople((prevState) => {
-          const index = prevState.findIndex((data) => data.id === id);
-          const newState = [...prevState];
-          newState[index] = response.data;
-          return newState;
+      .then(() => {
+        axios.get(GlobalApiUrl).then((getData) => {
+          setPeople(getData.data);
         });
-        console.log(response.data);
+        setPerson(undefined);
       });
   };
-  useEffect(() => {
-    axios
-      .get(`https://64ccd9752eafdcdc851a5daf.mockapi.io/SPData`)
-      .then((response) => {
-        setPeople(response.data);
-        console.log(response.data);
-      });
-  }, []);
 
   const toggleModal = () => {
     setModal(!modal);
+    handleUpdate();
   };
-
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal">
-        Edit Map <BsTools />
+      <button onClick={toggleModal} className="box box3">
+        <i className="fancylogo">
+          <AiFillEdit />
+        </i>
+        <span className="text">Define a Route</span>
+        <span className="number">Draw</span>
       </button>
       {modal && (
-        <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
-          <div className="modal-content">
-            <div className="mapcomp">
-              {" "}
-              <MyMap
-                addMarkerMode={addMarkerMode}
-                defineSeat={defineSeat}
-              />{" "}
-            </div>
-            <div className="controls">
-              <div className="button-container"></div>
-            </div>
-            <div className="table-container">
-              <table className="marker-table">
-                <thead>
-                  <tr>
-                    <th>Marker</th>
-                    <th>Position</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-              </table>
-              <div>
-                <Table singleLine>
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.HeaderCell>Name</Table.HeaderCell>
-                      <Table.HeaderCell>Team</Table.HeaderCell>
-                      <Table.HeaderCell>Seated</Table.HeaderCell>
-                      <Table.HeaderCell> Actions</Table.HeaderCell>
-                      <Table.HeaderCell> Marker Position</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
+        <div className="ipad-fit">
+          <div className="modal">
+            <div onClick={toggleModal} className="overlay"></div>
+            <div className="modal-content">
+              <div className="mapcomp">
+                {" "}
+                <Map
+                  addMarkerMode={addMarkerMode}
+                  defineSeat2={defineSeat2}
+                />{" "}
+              </div>
+              <div className="controls">
+                <div className="button-container"></div>
+                <div className="table-container">
+                  <div className="grid">
+                    <span>Name</span>
+
+                    <span>Seat</span>
+                    <span>Actions</span>
+
                     {people.map((person) => {
                       return (
-                        <Table.Row key={person.id}>
-                          <Table.Cell>{person.name}</Table.Cell>
-                          <Table.Cell>{person.team}</Table.Cell>
-                          <Table.Cell>
-                            {person.checkbox ? (
-                              "Assigned"
+                        <Fragment key={person.id}>
+                          <span>{person.name}</span>
+                          <span>
+                            {person.checkbox ? "Assigned" : "Unknown"}
+                          </span>
+                          <span>
+                            {IsActiveButton(person) ? (
+                              <button
+                                className="saveButton"
+                                onClick={SaveRoute}
+                              >
+                                Save Button
+                              </button>
                             ) : (
-                              <button onClick={() => defineSeat(person)}>
-                                {assignSeatMode
-                                  ? "Place a Marker"
-                                  : "Unassigned"}
+                              <button
+                                className="action-button"
+                                onClick={() => defineSeat(person)}
+                                disabled={IsButtonDisabled(person)}
+                              >
+                                <span>Draw</span>
+                                <i className="fancyLogo">
+                                  <AiFillEdit />{" "}
+                                </i>
                               </button>
                             )}
-                          </Table.Cell>
-                          <Table.Cell>
-                            {person.checkbox && (
-                              <button onClick={() => unassignSeat(person.id)}>
-                                Remove Seat
+                            {person.checkbox && !addMarkerMode && (
+                              <button
+                                className="action-button-delete"
+                                onClick={() => unassignSeat(person)}
+                              >
+                                Delete Route
                               </button>
                             )}
-                          </Table.Cell>
-                          <Table.Cell>
-                            {person.markerCoords
-                              .map((position) => position.toFixed(0))
-                              .join(", ")}
-                          </Table.Cell>
-                        </Table.Row>
+                          </span>
+                        </Fragment>
                       );
                     })}
-                  </Table.Body>
-                </Table>
+                  </div>
+                </div>{" "}
               </div>
+              <button className="close-modal" onClick={toggleModal}>
+                Close
+              </button>
             </div>
-            <button className="close-modal" onClick={toggleModal}>
-              Close Window
-            </button>
           </div>
         </div>
       )}

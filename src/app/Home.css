@@ -11,77 +11,81 @@ body {
    justify-content: space-between;
    align-items: center;
    font-family: "Trebuchet MS", sans-serif;
-   
 }
-
+body .background-image header h1 {
+    height: 900px;
+    font-size: 40px;
+    font-family: "Trebuchet MS", sans-serif;
+}
 .background-image {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -10;
+    z-index: 10;
+    background-color: #001220;
 }
-
-header h1{
+.input-container h1{
     color: rgb(255, 255, 255);
-    height: 450px;
-    display: flex;
-    flex-direction: column;
+    font-weight: 500;
+    font-size: 50px;
     align-items: center;
-    width: 100%;
     justify-content: center;
+   color: #fff;
+   margin-bottom: 100px;
 }
-
 #visual {
-    
     position: absolute;
-    top: 0;
+    bottom: -20%;
     left: 0;
     z-index: -10;
 }
-
 .bottom-section {
     width: 100%;
     display: flex;
     justify-content: center;
     height: 150px;
 }
-
 .input-container {
+    display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 600px;
     position: absolute;
     top: 50%;
-    left: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
-
 input {
-    
     width: 60%;
-    border: none;
+    border: 5px;
+    border-color: beige;
     font-size: 20px;
     padding: 10px;
     border-radius: 5px;
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
     box-sizing: border-box;
     margin: 0 auto;
-
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
 }
-
-
 #submit-icon {
     position:absolute;
     top: 10px;
-    right: 250px;
+    right: 135px;
     cursor: pointer;
     background-color: white;
     border: none;
     scale: 200%;
-    border-radius: 15px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0);
 }
-
-
 .images-section {
     width: 100%;
     max-width: 600px;
@@ -90,23 +94,58 @@ input {
     justify-content: space-between;
     padding: 10px;
 }
-
 .image-container {
     width: 48%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
 }
-
-.image-container img {
+.image-container img { 
     width: 100%;
 }
-
 a {
+    z-index: 10;
     color: white;
 }
-
-
-/* .fancySearchBar{
+.admin-login {
+    z-index: 200;
+    background-color: 001220;
+}
+.error-message {
+    z-index: 50;
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+    .body {
+        margin: 0;
+    padding: 0;
+    background-color: black; 
+   display: flex; 
+   flex-direction: column;
+   width: 100vw;
+   height: 100vh;
+   justify-content: space-between;
+   align-items: center;
+   font-family: "Trebuchet MS", sans-serif;
+}
+body .background-image header h1 {
+    font-size: 40px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+    .background-image {
+        display: flex;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        bottom: 236px;
+        overflow: visible;
+        z-index: 10;
+        background-color: #001220 ;
     
-}  */
+    }
+  }

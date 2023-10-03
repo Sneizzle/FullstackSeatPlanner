@@ -1,9 +1,12 @@
+import { PersonConfig } from "@/app/admin/Interface/Interfaces";
 import sql from "@/db";
 import type { NextApiRequest, NextApiResponse } from 'next'
 export default async function handler(req: NextApiRequest, res:NextApiResponse) {
   // Get data submitted in request's body.
-  const body = req.body;
+  const body = req.body as PersonConfig;
+ 
 
+    const id = req.query.id as string;
 
 
   // Optional logging to see the responses
@@ -19,31 +22,38 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse) 
 
 const rm = req.method;
 
+
     switch (rm) {
-    case 'POST':
-        const dbPostResponse = await sql`
-        INSERT INTO profiles (markercoords, location, team, name, checkbox)
-        values (${body.markercoords},${body.location},${body.team},${body.name},${body.checkbox})
-        returning *
-      `;
-      
-      return res.status(200).json( dbPostResponse );
- 
-  case 'GET':
-      const dbGetResponse = await sql`
-      SELECT * FROM profiles order by id`;
-    
-     
-    res.status(200).json( dbGetResponse );
-    
+   
+  case 'PUT':
+    const dbUpdateResponse = await sql`
+    UPDATE profiles
+    SET
+      markercoords = ${body.markercoords},
+      location = ${body.location},
+      team = ${body.team??null},
+      name = ${body.name},
+      checkbox = ${body.checkbox}
+    WHERE id = ${id}
+    returning *`;  
+    res.status(200).json( dbUpdateResponse );
   break;
-  
+ 
+  case 'DELETE':
+      const dbDeleteResponse = await sql`
+      DELETE FROM profiles WHERE id = ${id}
+      returning *`;
+     
+      res.status(200).json( dbDeleteResponse );
+      
+  break;
+
 
 
 
   default:
     return res.status(405);
-   
+    
   }
 
 

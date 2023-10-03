@@ -1,14 +1,9 @@
-import { PersonConfig } from "@/app/admin/Interfaces";
+import { PersonConfig } from "@/app/admin/Interface/Interfaces";
 import { atom } from "recoil";
-
-export const personState = atom <PersonConfig>({
+export const personState = atom <PersonConfig | undefined>({
   key: "personState", // unique ID (with respect to other atoms/selectors)
-  default: {} as PersonConfig, // default value (aka initial value)
+  default: undefined, // default value (aka initial value)
 });
-
-
-
-
 export const peopleState = atom <PersonConfig[]>({
     key: "peopleState", // unique ID (with respect to other atoms/selectors)
     default: [] // default value (aka initial value)
