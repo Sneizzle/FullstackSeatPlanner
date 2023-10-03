@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "createDB": "tsc --moduleResolution node --esModuleInterop true --outDir dist/db/ createDatabase.ts && node dist/db/createDatabase.js"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.4",
@@ -15,6 +16,7 @@
     "autoprefixer": "10.4.15",
     "axios": "^1.5.0",
     "bootstrap": "^5.3.2",
+    "dotenv": "^16.3.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "leaflet": "^1.9.4",
