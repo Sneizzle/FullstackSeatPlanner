@@ -43,7 +43,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var db_1 = __importDefault(require("./src/db"));
+require("dotenv/config");
+var db_1 = __importDefault(require("./db"));
+console.log(process.env.POSTGRES_USERNAME);
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
