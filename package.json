@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
-  },
+    "lint": "next lint",
+    "createDB": "tsc --moduleResolution node --esModuleInterop true --outDir dist/db/ createDatabase.ts && node dist/db/createDatabase.js"},
   "dependencies": {
     "@types/leaflet": "^1.9.4",
     "@types/node": "20.5.4",
