@@ -33,7 +33,7 @@ function Home() {
   }, []);
 
   return (
-    <body>
+    <>
       <div className="background-image">
         <Background></Background>
         <header>
@@ -60,7 +60,7 @@ function Home() {
       <div className="admin-login">
         <a href="/admin">Admin Login </a>
       </div>
-    </body>
+    </>
   );
 }
 

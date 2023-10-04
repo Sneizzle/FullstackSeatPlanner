@@ -1,7 +1,5 @@
 import { render, screen } from "@testing-library/react";
-
 import "@testing-library/jest-dom";
-import { describe, it } from "node:test";
 import Home from "@/app/page";
 
 describe("Describe frontpage", () => {
@@ -9,7 +7,7 @@ describe("Describe frontpage", () => {
     render(<Home />);
 
     const header = screen.getByRole("heading");
-    const headerText = "Who are you Llooking for?";
+    const headerText = "Who are you looking for?";
     expect(header).toHaveTextContent(headerText);
   });
 });
