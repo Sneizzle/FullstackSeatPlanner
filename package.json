@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "createDB": "tsc --moduleResolution node --esModuleInterop true --outDir dist/db/ createDatabase.ts && node dist/db/createDatabase.js"
+    "createDB": "tsc --moduleResolution node --esModuleInterop true --outDir dist/db/ createDatabase.ts && node dist/db/createDatabase.js",
+    "test1": "jest",
+    "testclear": "jest --clearCache",
+    "test2": "jest --watchAll --verbose",
+    "test3": "jest --coverage"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.4",
@@ -15,10 +19,12 @@
     "@types/react": "18.2.21",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.0",
+    "babel-jest": "^29.7.0",
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "identity-obj-proxy": "^3.0.0",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "leaflet.motion": "^0.3.2",
@@ -40,5 +46,16 @@
     "semantic-ui-react": "^2.1.4",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.23.0",
+    "@testing-library/jest-dom": "^6.1.3",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.5",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "install": "^0.13.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "npm": "^10.2.0"
   }
 }
