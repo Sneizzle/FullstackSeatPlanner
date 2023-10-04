@@ -8,10 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "createDB": "tsc --moduleResolution node --esModuleInterop true --outDir dist/db/ createDatabase.ts && node dist/db/createDatabase.js",
-    "test1": "jest",
-    "testclear": "jest --clearCache",
-    "test2": "jest --watchAll --verbose",
-    "test3": "jest --coverage"
+    "test": "jest --verbose --coverage --watchAll",
+    "testclear": "jest --clearCache"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.4",
